@@ -6,7 +6,8 @@ export const Container = styled.div`
   flex-direction: column;
 
   > label {
-    color: ${({ theme }) => theme.COLORS.WHITE};
+    color: ${({ $colortheme, theme }) =>
+      !$colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
     font-family: Roboto Slab;
     font-size: 1rem;
     font-style: normal;
@@ -19,21 +20,26 @@ export const Container = styled.div`
     justify-content: flex-start;
     align-items: center;
     border-radius: 0 10px 10px 10px;
-
-    border: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+    border: 1px solid
+      ${({ $colortheme, theme }) =>
+        !$colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
 
     input {
       width: 100%;
       height: 40px;
+      margin: 0 5px;
       border: none;
       outline: none;
-      padding: 12px;
-
-      background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
-      color: ${({ theme }) => theme.COLORS.WHITE};
+      padding: 16px;
+      background: ${({ $colortheme, theme }) =>
+        $colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
+      color: ${({ $colortheme, theme }) =>
+        !$colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
     }
+
     > svg {
-      color: ${({ theme }) => theme.COLORS.WHITE};
+      color: ${({ $colortheme, theme }) =>
+        !$colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
       margin-left: 12px;
     }
   }
