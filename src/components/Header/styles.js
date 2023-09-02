@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 export const Container = styled.header`
   grid-area: header;
   height: 105px;
   width: 100%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-color: ${({ theme }) => theme.COLORS.BLUE_300};
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
   display: flex;
   justify-content: space-between;

@@ -3,14 +3,14 @@ import ReactDOM from "react-dom/client";
 import { ThemeProvider } from "styled-components";
 import GlobalStyles from "./styles/global";
 import theme from "./styles/theme";
-import {CadTrip} from './pages/CadTrip'
+import {TripDetails} from './pages/TripDetails'
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <CadTrip />
+      <TripDetails />
     </ThemeProvider>
   </React.StrictMode>
 );
