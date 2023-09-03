@@ -18,29 +18,38 @@ export const Title = styled.header`
 
   > h1 {
     color: ${({ theme }) => theme.COLORS.WHITE};
-    font-family: 'Roboto Slab', serif;
+    font-family: "Roboto Slab", serif;
     font-size: 2rem;
   }
   > h2 {
     display: flex;
     align-items: center;
     color: ${({ theme }) => theme.COLORS.WHITE};
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: "Roboto Condensed", sans-serif;
     font-size: 1.5rem;
     margin: 1.5rem 0 0 0;
 
-    img{
-        width: 2rem;
-        height: 2rem;
-        margin-right: 1rem;
+    img {
+      width: 2rem;
+      height: 2rem;
+      margin-right: 1rem;
     }
   }
 `;
 
 export const CardArea = styled.div`
-display: flex;
-justify-content:space-around;
-align-items:center;
-padding: 1rem 0 ;
-gap: 0.5rem;
-`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 0.5rem;
+`;
+
+export const InvoiceArea = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem 0;
+  gap: 0.5rem;
+  flex-wrap: wrap; 
+`;

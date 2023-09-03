@@ -18,27 +18,24 @@ export const Container = styled.div`
     line-height: normal;
     margin-bottom: 0.5rem;
   }
+
+  @media screen and (max-width: 680px) {
+    height: 100%;
+  }
 `;
 
 export const InputArea = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   > p {
     color: ${({ theme }) => theme.COLORS.WHITE};
     font-family: "Roboto Condensed", sans-serif;
     margin: 0 0.4rem;
   }
-
-  > input {
-    color: ${({ theme }) => theme.COLORS.WHITE};
-    font-family: "Roboto Condensed", sans-serif;
-    font-size: 1.2rem;
-    background: none;
-    border: none;
-    outline: none;
-    appearance: none;
-    width: 100%;
-    text-align: center;
+  
+  @media screen and (max-width: 680px) {
+    flex-wrap: wrap;
   }
 `;
