@@ -5,13 +5,20 @@ import { ValueCard } from "../../components/ValueCard";
 import { DateTimeCard } from "../../components/DateTimeCard";
 import { Invoice } from "../../Components/Invoice";
 import { formatDate } from "../../utils/formatDate";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { compareDate } from "../../utils/dateDiff";
 
 import mapIcon from "../../assets/map.png";
 import walletIcon from "../../assets/wallet.png";
 
 export function TripDetails() {
+  const initialDateReturn = new Date();
+  initialDateReturn.setDate(initialDateReturn.getDate() + 1);
+
   const [invoices, setInvoices] = useState([]);
+  const [dateLeft, setDateLeft] = useState(new Date());
+  const [dateReturn, setDateReturn] = useState(initialDateReturn);
+  const [totalValue, setTotalValue] = useState(0);
 
   const handleInputChange = (invDescription, invValue) => {
     const newInvoice = {
@@ -28,6 +35,18 @@ export function TripDetails() {
     setInvoices(updatedInvoices);
   };
 
+  const handleDateLeftChange = (date) => {
+    setDateLeft(new Date(date));
+  };
+
+  const handleDateReturnChange = (date) => {
+    setDateReturn(new Date(date));
+  };
+
+  useEffect(() => {
+    setTotalValue(compareDate(dateLeft, dateReturn));
+  }, [dateLeft, dateReturn]);
+
   return (
     <Container>
       <Header />
@@ -42,12 +61,24 @@ export function TripDetails() {
           </h2>
         </Title>
         <CardArea>
-          <ValueCard title="Valor Disponível" value="280,00" IsRed={false} />
+          <ValueCard
+            title="Valor Disponível"
+            value={totalValue}
+            IsRed={false}
+          />
           <ValueCard title="Valor Gasto" value="160,00" IsRed={true} />
         </CardArea>
         <CardArea>
-          <DateTimeCard title="Data/Hora Saída" />
-          <DateTimeCard title="Data/Hora Retorno" />
+          <DateTimeCard
+            onDateChange={handleDateLeftChange}
+            dateValue={dateLeft}
+            title="Data/Hora Saída"
+          />
+          <DateTimeCard
+            onDateChange={handleDateReturnChange}
+            dateValue={dateReturn}
+            title="Data/Hora Retorno"
+          />
         </CardArea>
         <Title>
           <h2>
@@ -67,8 +98,8 @@ export function TripDetails() {
                 dateTime={String(invoice.dateTime)}
                 invDescription={invoice.description}
                 invValue={`R$ ${invoice.value}`}
-                key={String(index)}  
-                onDelete={() => handleDeleteInvoice(index)}              
+                key={String(index)}
+                onDelete={() => handleDeleteInvoice(index)}
                 readOnly
               />
             ))}
