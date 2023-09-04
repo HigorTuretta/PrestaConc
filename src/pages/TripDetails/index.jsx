@@ -3,7 +3,7 @@ import { Header } from "../../components/Header";
 import { ButtonText } from "../../components/ButtonText";
 import { ValueCard } from "../../components/ValueCard";
 import { DateTimeCard } from "../../components/DateTimeCard";
-import { Invoice } from "../../Components/Invoice";
+import { Invoice } from "../../components/Invoice";
 import { formatDate } from "../../utils/formatDate";
 import { useState, useEffect } from "react";
 import { compareDate } from "../../utils/dateDiff";
