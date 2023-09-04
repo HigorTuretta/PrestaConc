@@ -8,8 +8,8 @@ import { formatDate } from "../../utils/formatDate";
 import { useState, useEffect } from "react";
 import { compareDate } from "../../utils/dateDiff";
 
-import mapIcon from "../../assets/map.png";
-import walletIcon from "../../assets/wallet.png";
+import mapIcon from "../../assets/Map.png";
+import walletIcon from "../../assets/Wallet.png";
 
 export function TripDetails() {
   const initialDateReturn = new Date();
