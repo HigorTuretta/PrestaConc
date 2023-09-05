@@ -1,9 +1,10 @@
-import { Container, Title, CardArea, InvoiceArea } from "./styles";
+import { Container, CardArea, InvoiceArea } from "./styles";
 import { Header } from "../../components/Header";
-import { ButtonText } from "../../components/ButtonText";
 import { ValueCard } from "../../components/ValueCard";
 import { DateTimeCard } from "../../components/DateTimeCard";
 import { Invoice } from "../../components/Invoice";
+import { Title } from "../../Components/Title";
+import { SubTitle } from "../../components/SubTitle";
 import { formatDate } from "../../utils/formatDate";
 import { useState, useEffect } from "react";
 import { compareDate } from "../../utils/dateDiff";
@@ -19,6 +20,7 @@ export function TripDetails() {
   const [dateLeft, setDateLeft] = useState(new Date());
   const [dateReturn, setDateReturn] = useState(initialDateReturn);
   const [totalValue, setTotalValue] = useState(0);
+  const [amountSpend, setAmountSpend] = useState(0);
 
   const handleInputChange = (invDescription, invValue) => {
     const newInvoice = {
@@ -47,26 +49,28 @@ export function TripDetails() {
     setTotalValue(compareDate(dateLeft, dateReturn));
   }, [dateLeft, dateReturn]);
 
+  useEffect(() => {
+    const totalInvoiceValue = invoices.reduce(
+      (acc, invoice) => acc + parseFloat(invoice.value),
+      0
+    );
+
+    setAmountSpend(totalInvoiceValue);
+  }, [invoices]);
+
   return (
     <Container>
       <Header />
       <main>
-        <Title>
-          <h1>Detalhes da Viagem</h1>
-          <ButtonText title="Voltar" isAtive />
-        </Title>
-        <Title>
-          <h2>
-            <img src={mapIcon} alt="Icone de Mapa" /> Muriaé/MG
-          </h2>
-        </Title>
+        <Title title = 'Detalhes da Viagem' returnButton />      
+        <SubTitle title={"Muriaé/MG"} iconSrc={mapIcon} />
         <CardArea>
           <ValueCard
-            title="Valor Disponível"
+            title="Valor Total de Diárias"
             value={totalValue}
             IsRed={false}
           />
-          <ValueCard title="Valor Gasto" value="160,00" IsRed={true} />
+          <ValueCard title="Valor Gasto" value={amountSpend} IsRed={true} />
         </CardArea>
         <CardArea>
           <DateTimeCard
@@ -80,11 +84,7 @@ export function TripDetails() {
             title="Data/Hora Retorno"
           />
         </CardArea>
-        <Title>
-          <h2>
-            <img src={walletIcon} alt="Icone de Carteira" /> Suas Notas
-          </h2>
-        </Title>
+        <SubTitle title={"Suas Notas"} iconSrc={walletIcon} />
         <InvoiceArea>
           <Invoice
             isNew

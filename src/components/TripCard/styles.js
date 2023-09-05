@@ -27,6 +27,7 @@ export const Image = styled.img`
 
   border-radius: 0.625rem;
   background: url(${({$url}) => $url}) 50% / cover no-repeat;
+  background-position: center 40%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   filter: brightness(0.8);
 
@@ -40,7 +41,7 @@ export const Description = styled.div`
   height: 3.625rem;
   padding: 12px;
   border-radius: 0rem 0rem 0.3125rem 0.3125rem;
-  background: ${({ theme }) => theme.COLORS.BLUE_300};
+  background: ${({ theme }) => theme.COLORS.BLUE_100};
   color: ${({ theme }) => theme.COLORS.WHITE};
   font-family: Roboto Slab;
   font-size: 1.5rem;
