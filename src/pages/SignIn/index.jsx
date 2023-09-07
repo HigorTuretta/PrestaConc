@@ -5,12 +5,29 @@ import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/auth";
+
 export function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { signIn } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function handleLogin() {
     setIsLoading(true);
+
+    signIn({ email, password })
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsLoading(false);
+      });
+  }
+
+  function handleKeyPress(e){   
+    e.key === 'Enter' && handleLogin()
   }
 
   useEffect(() => {
@@ -31,12 +48,16 @@ export function SignIn() {
             type="email"
             icon={FiMail}
             title="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            onKeyDown={(e) => handleKeyPress(e)}
           />
           <Input
             placeholder="Sua senha"
             type="password"
             icon={FiLock}
             title="Senha"
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => handleKeyPress(e)}
           />
           <Button
             loading={isLoading}
