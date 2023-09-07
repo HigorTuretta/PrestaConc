@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -12,14 +11,7 @@ export const Container = styled.div`
     max-width: 720px;
     grid-area: content;
     padding: 0 2rem 3rem 2rem ;
-
-    h1{
-        font-family: 'Roboto Slab', serif;
-        font-weight: 700;
-        font-size: 2rem;
-        text-align: center;
-        padding: 1.5rem 0 ;
-    }
+    margin: 0 auto;
   }
   
 `;

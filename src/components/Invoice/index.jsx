@@ -7,6 +7,7 @@ import {
 } from "./styles";
 import { FiTrash2, FiPlus } from "react-icons/fi";
 import { useState } from "react";
+import { Message, useToaster } from "rsuite";
 
 export function Invoice({
   dateTime,
@@ -20,12 +21,31 @@ export function Invoice({
 }) {
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
+  const toaster = useToaster();
 
   function handleAddClick() {
+    if (value === "" || value === 0) {
+      const message = (
+        <Message type="error" showIcon closable>
+          Informe um valor para a nota fiscal!
+        </Message>
+      );
+      toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+      return;
+    }
+
     onInputChange(description, value);
     setDescription("");
     setValue("");
   }
+
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      handleAddClick();
+    }
+  }
+
+  handleKeyDown;
 
   const handleDeleteClick = () => {
     onDelete();
@@ -35,7 +55,11 @@ export function Invoice({
     <Container $isnew={isNew}>
       <InvoiceHeader $isnew={isNew}>
         <p>{dateTime}</p>
-        <ActionButton $isnew={isNew} {...rest} onClick={ isNew ? handleAddClick : handleDeleteClick}>
+        <ActionButton
+          $isnew={isNew}
+          {...rest}
+          onClick={isNew ? handleAddClick : handleDeleteClick}
+        >
           {isNew ? <FiPlus /> : <FiTrash2 />}
         </ActionButton>
       </InvoiceHeader>
@@ -43,7 +67,7 @@ export function Invoice({
       <InvoiceDetails $isnew={isNew}>
         <input
           type="text"
-          placeholder="Descrição"
+          placeholder={invDescription == '' ? 'Sem Descrição' : "Descrição"}
           {...rest}
           autoComplete="false"
           value={invDescription ? invDescription : description}
@@ -51,12 +75,13 @@ export function Invoice({
           readOnly={readOnly}
         />
         <input
-          type={invValue ? 'text' : 'number'}
+          type={invValue ? "text" : "number"}
           placeholder="Valor"
           step="0.01"
           {...rest}
           value={invValue ? invValue : value}
           onChange={(e) => setValue(e.target.value)}
+          onKeyDown={handleKeyDown}
           readOnly={readOnly}
         />
       </InvoiceDetails>

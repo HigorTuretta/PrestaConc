@@ -3,7 +3,20 @@ import { Container, Form, Background } from "./styles";
 import { FiMail, FiLock } from "react-icons/fi";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 export function SignIn() {
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  function handleLogin() {
+    setIsLoading(true);
+  }
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
+
   return (
     <Container>
       <Form>
@@ -25,9 +38,17 @@ export function SignIn() {
             icon={FiLock}
             title="Senha"
           />
-          <Button title="Login" />
+          <Button
+            loading={isLoading}
+            onClick={() => handleLogin()}
+            title="Login"
+          />
         </div>
-        <ButtonText title="Crie sua conta!" isAtive />
+        <ButtonText
+          title="Crie sua conta!"
+          isAtive={!isLoading}
+          onClick={() => navigate("/register")}
+        />
       </Form>
       <Background />
     </Container>

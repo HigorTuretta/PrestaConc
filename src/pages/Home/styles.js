@@ -13,14 +13,12 @@ export const Container = styled.div`
     align-items: center;
     flex-direction: column;
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 600;
-      font-family: "Roboto Slab", serif;
-      font-weight: 700;
-      margin: 2rem 0;
-      letter-spacing: 1px;
-      text-rendering: optimizeLegibility;
+    max-width: 720px;
+    margin: 0 auto;
+
+    .button-area{
+      width: 80%;
+      margin: 0 0 2rem 0;
     }
   }
 `;

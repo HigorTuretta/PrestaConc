@@ -61,8 +61,8 @@ export function TripDetails() {
   return (
     <Container>
       <Header />
+      <Title title="Detalhes da Viagem" returnButton />
       <main>
-        <Title title = 'Detalhes da Viagem' returnButton />      
         <SubTitle title={"Muriaé/MG"} iconSrc={mapIcon} />
         <CardArea>
           <ValueCard
