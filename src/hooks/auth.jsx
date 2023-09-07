@@ -15,7 +15,7 @@ function AuthProvider({ children }) {
       const { user, token } = response.data;
       localStorage.setItem("@prestaConc:user", JSON.stringify(user));
       localStorage.setItem("@prestaConc:token", token);
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`; // inserindo um token do tipo bearer de autorização em todas as requisições a partir de agora.
+      api.defaults.headers.authorization = `Bearer ${token}`; // inserindo um token do tipo bearer de autorização em todas as requisições a partir de agora.
       setData({ user, token });
     } catch (error) {
       if (error.response) {
