@@ -5,6 +5,7 @@ import { DateTimeCard } from "../../components/DateTimeCard";
 import { Invoice } from "../../components/Invoice";
 import { Title } from "../../Components/Title";
 import { SubTitle } from "../../components/SubTitle";
+import { Modal } from "../../components/Modal";
 import { Loader } from "../../components/Loader";
 import { formatDate } from "../../utils/formatDate";
 import { useState, useEffect } from "react";
@@ -14,7 +15,7 @@ import { Message, useToaster } from "rsuite";
 import { useParams, useNavigate } from "react-router-dom";
 import mapIcon from "../../assets/Map.png";
 import walletIcon from "../../assets/Wallet.png";
-import { FaTrashCan } from "react-icons/fa6";
+import { FaTrashCan, FaTriangleExclamation } from "react-icons/fa6";
 
 export function TripDetails() {
   const params = useParams();
@@ -24,8 +25,22 @@ export function TripDetails() {
   const [totalValue, setTotalValue] = useState(0);
   const [amountSpend, setAmountSpend] = useState(0);
   const [tripData, setTripData] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const [userResponse, setUserResponse] = useState(null);
+
   const toaster = useToaster();
   const navigate = useNavigate();
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
+
+  const handleModalResponse = (response) => {
+    setUserResponse(response);
+    setShowModal(false);
+    response &&  handleDeleteTrip();
+  };
+
   const handleInputChange = (invDescription, invValue) => {
     api
       .post(`/invoices/${params.id}`, {
@@ -91,10 +106,10 @@ export function TripDetails() {
 
   const handleDeleteTrip = () => {
     api.delete(`/trips/${params.id}`).then(() => {
-      navigate(-1);
+      navigate('/');
       const message = (
-        <Message type="sucess" showIcon closable>
-          Nota removida com sucesso.
+        <Message type="success" showIcon closable>
+          Viagem deletada com sucesso.
         </Message>
       );
       toaster.push(message, {
@@ -155,7 +170,7 @@ export function TripDetails() {
               title={`${tripData?.city}/${tripData?.uf?.toUpperCase()}`}
               iconSrc={mapIcon}
             />
-            <button onClick={() => handleDeleteTrip()}>
+            <button onClick={() => handleShowModal()}>
               <FaTrashCan />
             </button>
           </div>
@@ -212,6 +227,16 @@ export function TripDetails() {
               ))}
           </InvoiceArea>
         </main>
+      )}
+      {showModal && (
+        <Modal
+          icon={FaTriangleExclamation}
+          question="Deseja realmente deletar essa viagem? Você perderá todos os dados de notas cadastradas para ela."
+          buttonTrue="Sim, deletar"
+          buttonFalse="Cancelar"
+          onResponse={handleModalResponse}
+          
+        />
       )}
     </Container>
   );
