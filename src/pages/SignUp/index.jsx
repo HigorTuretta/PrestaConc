@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 import { Message, useToaster } from "rsuite";
+import { isEmail } from "validator";
 
 export function SignUp() {
   const navigate = useNavigate();
@@ -25,6 +26,17 @@ export function SignUp() {
       const message = (
         <Message type="warning" showIcon closable>
           Preencha todos os campos.
+        </Message>
+      );
+      toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+      return;
+    }
+
+    if (!isEmail(email)){
+      setIsLoading(false);
+      const message = (
+        <Message type="warning" showIcon closable>
+          Informe um email válido!
         </Message>
       );
       toaster.push(message, { placement: "bottomCenter", duration: 5000 });
@@ -51,7 +63,7 @@ export function SignUp() {
           </Message>
         );
         toaster.push(message, { placement: "bottomCenter", duration: 5000 });
-        navigate('/')
+        navigate("/");
       })
       .catch((err) => {
         setIsLoading(false);

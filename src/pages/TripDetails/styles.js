@@ -8,7 +8,21 @@ export const Container = styled.div`
     grid-area: content;
     margin: 0 auto;
     max-width: 720px;
-    padding: 2rem;
+    padding: 0 2rem;
+
+    .city-area {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .city-area button {
+      padding: 0.5rem;
+      background-color: transparent;
+      border: solid 1px ${({theme}) => theme.COLORS.RED};
+      color: ${({theme}) => theme.COLORS.RED};
+      border-radius: 5px;
+      text-align: center;
+    }
   }
 `;
 
@@ -26,5 +40,5 @@ export const InvoiceArea = styled.div`
   align-items: center;
   padding: 1rem 0;
   gap: 0.5rem;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 `;

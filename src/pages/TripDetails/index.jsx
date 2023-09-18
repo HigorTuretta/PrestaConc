@@ -11,9 +11,10 @@ import { useState, useEffect } from "react";
 import { compareDate } from "../../utils/dateDiff";
 import { api } from "../../services/api";
 import { Message, useToaster } from "rsuite";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import mapIcon from "../../assets/Map.png";
 import walletIcon from "../../assets/Wallet.png";
+import { FaTrashCan } from "react-icons/fa6";
 
 export function TripDetails() {
   const params = useParams();
@@ -24,7 +25,7 @@ export function TripDetails() {
   const [amountSpend, setAmountSpend] = useState(0);
   const [tripData, setTripData] = useState();
   const toaster = useToaster();
-
+  const navigate = useNavigate();
   const handleInputChange = (invDescription, invValue) => {
     api
       .post(`/invoices/${params.id}`, {
@@ -56,7 +57,7 @@ export function TripDetails() {
       api.delete(`/invoices/${invoiceId}`).then(() => {
         setInvoices((updatedInvoices) =>
           updatedInvoices.filter((invoice) => invoice.id !== invoiceId)
-        )
+        );
         const message = (
           <Message type="success" showIcon closable>
             Nota Removida
@@ -88,6 +89,21 @@ export function TripDetails() {
     setDateReturn(new Date(date));
   };
 
+  const handleDeleteTrip = () => {
+    api.delete(`/trips/${params.id}`).then(() => {
+      navigate(-1);
+      const message = (
+        <Message type="sucess" showIcon closable>
+          Nota removida com sucesso.
+        </Message>
+      );
+      toaster.push(message, {
+        placement: "topEnd",
+        duration: 5000,
+      });
+    });
+  };
+
   useEffect(() => {
     if (dateLeft && dateReturn) {
       setTotalValue(compareDate(dateLeft, dateReturn));
@@ -117,7 +133,7 @@ export function TripDetails() {
       const res = await api.get(`/details/${params.id}`);
 
       setTripData(res.data.tripData[0]);
-      setInvoices(res.data.tripNotes);      
+      setInvoices(res.data.tripNotes);
       setDateLeft(new Date(res.data.tripData[0].dataLeave));
       setDateReturn(new Date(res.data.tripData[0].dataReturn));
       setAmountSpend(res.data.tripData[0].totalSpend);
@@ -134,10 +150,16 @@ export function TripDetails() {
         <Loader />
       ) : (
         <main>
-          <SubTitle
-            title={`${tripData?.city}/${tripData?.uf?.toUpperCase()}`}
-            iconSrc={mapIcon}
-          />
+          <div className="city-area">
+            <SubTitle
+              title={`${tripData?.city}/${tripData?.uf?.toUpperCase()}`}
+              iconSrc={mapIcon}
+            />
+            <button onClick={() => handleDeleteTrip()}>
+              <FaTrashCan />
+            </button>
+          </div>
+
           <CardArea>
             <ValueCard
               title="Valor Total de Diárias"

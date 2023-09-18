@@ -100,7 +100,7 @@ export function CadTrip() {
               type="text"
               title="Cidade"
               onChange={(e) => setCity(e.target.value)}
-              onkeydown={(e) => handleKeyPress(e)}
+              onKeyDown={(e) => handleKeyPress(e)}
             />
           </div>
         </Form>

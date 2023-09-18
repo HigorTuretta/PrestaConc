@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
+  max-width: 720px;
   display: flex;
 
   justify-content: ${({ $returnButton }) =>
-    $returnButton ? "space-evenly" : "center"};
+    $returnButton ? "space-between" : "center"};
   align-items: center;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   padding: 0 2rem;
 
   @media screen and (max-width:450px) {
