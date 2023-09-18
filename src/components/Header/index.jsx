@@ -1,6 +1,6 @@
 import { Container, Profile, Logout, Logo } from "./styles";
 import { RiShutDownLine } from "react-icons/ri";
-import avatarUrl from "../../assets/avatar.jpg";
+import avatarUrl from "../../assets/avatar_placeholder.svg";
 import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
 export function Header() {

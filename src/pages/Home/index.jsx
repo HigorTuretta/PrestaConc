@@ -3,7 +3,8 @@ import { TripCard } from "../../components/TripCard";
 import { Header } from "../../components/Header";
 import { Title } from "../../components/Title";
 import { Button } from "../../components/Button";
-import imgCard from "../../assets/travel.jpg";
+import { Loader } from "../../components/Loader";
+import { formatDate } from '../../utils/formatDate'
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useState, useEffect } from "react";
@@ -22,8 +23,7 @@ export function Home() {
   useEffect(() => {
     async function fetchTrips() {
       const res = await api.get("/trips");
-      console.log(res)
-      setTrips(res.data);      
+      setTrips(res.data);
     }
 
     fetchTrips();
@@ -33,23 +33,28 @@ export function Home() {
     <Container>
       <Header />
       <Title title="Suas Viagens" />
-      <main>
-        <div className="button-area">
-          <Button
-            title={"Adicionar uma Viagem"}
-            onClick={() => handleCreateTrip()}
-          />
-        </div>
-        {trips &&
-          trips.map((trip) => (
-            <TripCard
-              title={trip.city}
-              key={String(trip.id)}
-              onClick={() => handleTripDetails(trip.id)}
-              $url={imgCard}
+      {trips === undefined ? (
+        <Loader />
+      ) : (
+        <main>
+          <div className="button-area">
+            <Button
+              title={"Adicionar uma Viagem"}
+              onClick={() => handleCreateTrip()}
             />
-          ))}
-      </main>
+          </div>
+          {trips &&
+            trips.map((trip) => (
+              <TripCard
+                title={`${trip.city} / ${trip.uf.toUpperCase()}`}
+                dataLeave={formatDate(new Date(trip.dataLeave))}
+                dataReturn={formatDate(new Date(trip.dataReturn))}
+                key={String(trip.trip_id)}
+                onClick={() => handleTripDetails(trip.trip_id)}    
+              />
+            ))}
+        </main>
+      )}
     </Container>
   );
 }

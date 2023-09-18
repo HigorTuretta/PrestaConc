@@ -76,6 +76,10 @@ export function CadTrip() {
       });
   }
 
+  function handleKeyPress(e){   
+    e.key === 'Enter' && handleCadTrip()
+  }
+
   useEffect(() => {
     setIsLoading(false);
   }, []);
@@ -96,6 +100,7 @@ export function CadTrip() {
               type="text"
               title="Cidade"
               onChange={(e) => setCity(e.target.value)}
+              onkeydown={(e) => handleKeyPress(e)}
             />
           </div>
         </Form>

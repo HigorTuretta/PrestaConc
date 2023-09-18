@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import imgCard from "../../assets/travel.png";
 
 export const Container = styled.div`
   display: flex;
@@ -19,36 +20,55 @@ export const Container = styled.div`
   }
 `;
 
-export const Image = styled.img`
-  width: 27.8125rem;
-  height: 6.0625rem;
-  flex-shrink: 0;
-  border: none;
-  border-radius: 0.625rem;
-  background: url(${({ $url }) => $url}) 50% / cover no-repeat;
-  background-position: center 40%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  filter: brightness(0.8);
+export const Description = styled.div`
+  width: 25rem;
+  height: 5rem;
+  padding: 12px;
+  border-radius: 5px;
+  background: url(${imgCard});
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   @media (max-width: 520px) {
     width: 90%;
   }
 `;
 
-export const Description = styled.div`
-  width: 25.6875rem;
-  height: 3.625rem;
-  padding: 12px;
-  border-radius: 0rem 0rem 0.3125rem 0.3125rem;
-  background: ${({ theme }) => theme.COLORS.BLUE_100};
-  color: ${({ theme }) => theme.COLORS.WHITE};
+export const City = styled.div`
   font-family: Roboto Slab;
-  font-size: 1.5rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+  color: ${({ theme }) => theme.COLORS.WHITE};
+  > span {
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+  > h4 {
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+`;
 
-  @media (max-width: 520px) {
-    width: 80%;
+export const TripData = styled.div`
+  font-family: Roboto Slab;
+  font-weight: 400;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  flex-direction: column;
+
+  > div {
+    display: flex;
+    gap: 0.5em;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+    color: ${({ theme }) => theme.COLORS.WHITE};
+    font-size: 0.8rem;
   }
 `;

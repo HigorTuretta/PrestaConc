@@ -117,7 +117,7 @@ export function TripDetails() {
       const res = await api.get(`/details/${params.id}`);
 
       setTripData(res.data.tripData[0]);
-      setInvoices(res.data.tripNotes);
+      setInvoices(res.data.tripNotes);      
       setDateLeft(new Date(res.data.tripData[0].dataLeave));
       setDateReturn(new Date(res.data.tripData[0].dataReturn));
       setAmountSpend(res.data.tripData[0].totalSpend);
