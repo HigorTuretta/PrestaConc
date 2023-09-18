@@ -5,36 +5,79 @@ import { DateTimeCard } from "../../components/DateTimeCard";
 import { Invoice } from "../../components/Invoice";
 import { Title } from "../../Components/Title";
 import { SubTitle } from "../../components/SubTitle";
+import { Loader } from "../../components/Loader";
 import { formatDate } from "../../utils/formatDate";
 import { useState, useEffect } from "react";
 import { compareDate } from "../../utils/dateDiff";
-
+import { api } from "../../services/api";
+import { Message, useToaster } from "rsuite";
+import { useParams } from "react-router-dom";
 import mapIcon from "../../assets/Map.png";
 import walletIcon from "../../assets/Wallet.png";
 
 export function TripDetails() {
-  const initialDateReturn = new Date();
-  initialDateReturn.setDate(initialDateReturn.getDate() + 1);
-
+  const params = useParams();
   const [invoices, setInvoices] = useState([]);
-  const [dateLeft, setDateLeft] = useState(new Date());
-  const [dateReturn, setDateReturn] = useState(initialDateReturn);
+  const [dateLeft, setDateLeft] = useState();
+  const [dateReturn, setDateReturn] = useState();
   const [totalValue, setTotalValue] = useState(0);
   const [amountSpend, setAmountSpend] = useState(0);
+  const [tripData, setTripData] = useState();
+  const toaster = useToaster();
 
   const handleInputChange = (invDescription, invValue) => {
-    const newInvoice = {
-      description: invDescription,
-      value: parseFloat(invValue).toFixed(2),
-      dateTime: formatDate(new Date()),
-    };
-
-    setInvoices([...invoices, newInvoice]);
+    api
+      .post(`/invoices/${params.id}`, {
+        description: invDescription,
+        value: invValue,
+      })
+      .then((res) => {
+        const newInvoice = {
+          description: invDescription,
+          value: invValue,
+          created_at: new Date(),
+          id: res.data[0],
+        };
+        setInvoices([...invoices, newInvoice]);
+        const message = (
+          <Message type="success" showIcon closable>
+            Nota Adicionada
+          </Message>
+        );
+        toaster.push(message, {
+          placement: "topEnd",
+          duration: 5000,
+        });
+      });
   };
 
-  const handleDeleteInvoice = (index) => {
-    const updatedInvoices = invoices.filter((_, i) => i !== index);
-    setInvoices(updatedInvoices);
+  const handleDeleteInvoice = (invoiceId) => {
+    try {
+      api.delete(`/invoices/${invoiceId}`).then(() => {
+        setInvoices((updatedInvoices) =>
+          updatedInvoices.filter((invoice) => invoice.id !== invoiceId)
+        )
+        const message = (
+          <Message type="success" showIcon closable>
+            Nota Removida
+          </Message>
+        );
+        toaster.push(message, {
+          placement: "topEnd",
+          duration: 5000,
+        });
+      });
+    } catch (error) {
+      const message = (
+        <Message type="error" showIcon closable>
+          Falha ao remover Nota.
+        </Message>
+      );
+      toaster.push(message, {
+        placement: "topEnd",
+        duration: 5000,
+      });
+    }
   };
 
   const handleDateLeftChange = (date) => {
@@ -46,8 +89,19 @@ export function TripDetails() {
   };
 
   useEffect(() => {
-    setTotalValue(compareDate(dateLeft, dateReturn));
+    if (dateLeft && dateReturn) {
+      setTotalValue(compareDate(dateLeft, dateReturn));
+    }
   }, [dateLeft, dateReturn]);
+
+  useEffect(() => {
+    api.put(`details/${params.id}`, {
+      dataLeave: dateLeft,
+      dataReturn: dateReturn,
+      dailyTotal: totalValue,
+      totalSpend: amountSpend,
+    });
+  }, [totalValue]);
 
   useEffect(() => {
     const totalInvoiceValue = invoices.reduce(
@@ -58,53 +112,85 @@ export function TripDetails() {
     setAmountSpend(totalInvoiceValue);
   }, [invoices]);
 
+  useEffect(() => {
+    async function fetchTripData() {
+      const res = await api.get(`/details/${params.id}`);
+
+      setTripData(res.data.tripData[0]);
+      setInvoices(res.data.tripNotes);
+      setDateLeft(new Date(res.data.tripData[0].dataLeave));
+      setDateReturn(new Date(res.data.tripData[0].dataReturn));
+      setAmountSpend(res.data.tripData[0].totalSpend);
+    }
+
+    fetchTripData();
+  }, []);
+
   return (
     <Container>
       <Header />
-      <Title title="Detalhes da Viagem" returnButton />
-      <main>
-        <SubTitle title={"Muriaé/MG"} iconSrc={mapIcon} />
-        <CardArea>
-          <ValueCard
-            title="Valor Total de Diárias"
-            value={totalValue}
-            IsRed={false}
+      <Title title="Detalhes da Viagem" returnButton goTo="/" />
+      {tripData === undefined ? (
+        <Loader />
+      ) : (
+        <main>
+          <SubTitle
+            title={`${tripData?.city}/${tripData?.uf?.toUpperCase()}`}
+            iconSrc={mapIcon}
           />
-          <ValueCard title="Valor Gasto" value={amountSpend} IsRed={true} />
-        </CardArea>
-        <CardArea>
-          <DateTimeCard
-            onDateChange={handleDateLeftChange}
-            dateValue={dateLeft}
-            title="Data/Hora Saída"
-          />
-          <DateTimeCard
-            onDateChange={handleDateReturnChange}
-            dateValue={dateReturn}
-            title="Data/Hora Retorno"
-          />
-        </CardArea>
-        <SubTitle title={"Suas Notas"} iconSrc={walletIcon} />
-        <InvoiceArea>
-          <Invoice
-            isNew
-            dateTime="Adicione uma nota fiscal"
-            onInputChange={handleInputChange}
-          />
+          <CardArea>
+            <ValueCard
+              title="Valor Total de Diárias"
+              value={totalValue.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
+              IsRed={false}
+            />
+            <ValueCard
+              title="Valor Gasto"
+              value={amountSpend.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+              })}
+              IsRed={true}
+            />
+          </CardArea>
+          <CardArea>
+            <DateTimeCard
+              onDateChange={handleDateLeftChange}
+              dateValue={dateLeft}
+              title="Data/Hora Saída"
+            />
+            <DateTimeCard
+              onDateChange={handleDateReturnChange}
+              dateValue={dateReturn}
+              title="Data/Hora Retorno"
+            />
+          </CardArea>
+          <SubTitle title={"Suas Notas"} iconSrc={walletIcon} />
+          <InvoiceArea>
+            <Invoice
+              isNew
+              dateTime="Adicione uma nota fiscal"
+              onInputChange={handleInputChange}
+            />
 
-          {invoices &&
-            invoices.map((invoice, index) => (
-              <Invoice
-                dateTime={String(invoice.dateTime)}
-                invDescription={invoice.description}
-                invValue={`R$ ${invoice.value}`}
-                key={String(index)}
-                onDelete={() => handleDeleteInvoice(index)}
-                readOnly
-              />
-            ))}
-        </InvoiceArea>
-      </main>
+            {invoices &&
+              invoices.map((invoice) => (
+                <Invoice
+                  key={invoice.id}
+                  dateTime={formatDate(new Date(invoice.created_at))}
+                  invDescription={invoice.description}
+                  invValue={`R$ ${invoice.value}`}
+                  onDelete={() => handleDeleteInvoice(invoice.id)}
+                  readOnly
+                  entranceAnimation
+                />
+              ))}
+          </InvoiceArea>
+        </main>
+      )}
     </Container>
   );
 }

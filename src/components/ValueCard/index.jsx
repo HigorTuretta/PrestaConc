@@ -5,10 +5,7 @@ export function ValueCard({ title, value, IsRed = false }) {
     <Container $isred={IsRed}>
       <h5>{title}</h5>
       <h1>
-        {value.toLocaleString("pt-br", {
-          style: "currency",
-          currency: "BRL",
-        })}
+        {value}
       </h1>
     </Container>
   );

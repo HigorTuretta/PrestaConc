@@ -8,7 +8,7 @@ import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 import { Message, useToaster } from "rsuite";
 
-export function CadTrip() {  
+export function CadTrip() {
   const [uf, setUf] = useState("");
   const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -20,14 +20,41 @@ export function CadTrip() {
     api
       .post("/trips/", { uf, city })
       .then((res) => {
-        const trip_id = res.data[0]        
+        const trip_id = res.data[0];
         const message = (
           <Message type="success" showIcon closable>
             Viagem adicionada com sucesso!
           </Message>
         );
         toaster.push(message, { placement: "bottomCenter", duration: 5000 });
-        navigate(`/details/${trip_id}`);
+        const initialDateLeft = new Date();
+        const initialDateReturn = new Date();
+        initialDateReturn.setDate(initialDateLeft.getDate() + 1);
+
+        api
+          .post("/details", {
+            trip_id,
+            dataLeave: initialDateLeft,
+            dataReturn: initialDateReturn,
+            dailyTotal: 80,
+            totalSpend: 0,
+          })
+          .then(() => {
+            navigate(`/details/${trip_id}`);
+          })
+          .catch((err) => {
+            const message = (
+              <Message type="error" showIcon closable>
+                Erro ao redirecionar ou cadastrar dados da viagem. Erro:{" "}
+                {err.message}
+              </Message>
+            );
+            toaster.push(message, {
+              placement: "bottomCenter",
+              duration: 5000,
+            });
+            navigate(-1);
+          });
       })
       .catch((err) => {
         setIsLoading(false);

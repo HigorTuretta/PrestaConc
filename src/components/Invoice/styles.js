@@ -8,6 +8,21 @@ export const Container = styled.div`
     $isnew ? theme.COLORS.BACKGROUND_900 : theme.COLORS.YELLOW};
   border: ${({ theme, $isnew }) => ($isnew ? theme.COLORS.YELLOW : "none")} 1px
     dashed;
+
+  .tilt-in-fwd-tl {
+    animation: tilt-in-fwd-tl 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  @keyframes tilt-in-fwd-tl {
+    0% {
+      transform: rotateY(-20deg) rotateX(35deg) translate(-300px, -300px)
+        skew(35deg, -10deg);
+      opacity: 0;
+    }
+    100% {
+      transform: rotateY(0) rotateX(0deg) translate(0, 0) skew(0deg, 0deg);
+      opacity: 1;
+    }
+  }
 `;
 
 export const InvoiceHeader = styled.div`

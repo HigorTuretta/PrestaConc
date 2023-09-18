@@ -17,6 +17,7 @@ export function Invoice({
   onDelete,
   invDescription,
   invValue,
+  entranceAnimation,
   ...rest
 }) {
   const [description, setDescription] = useState("");
@@ -52,7 +53,10 @@ export function Invoice({
   };
 
   return (
-    <Container $isnew={isNew}>
+    <Container
+      $isnew={isNew}
+      className={entranceAnimation ? "tilt-in-fwd-tl" : ""}
+    >
       <InvoiceHeader $isnew={isNew}>
         <p>{dateTime}</p>
         <ActionButton
@@ -67,7 +71,7 @@ export function Invoice({
       <InvoiceDetails $isnew={isNew}>
         <input
           type="text"
-          placeholder={invDescription == '' ? 'Sem Descrição' : "Descrição"}
+          placeholder={invDescription == "" ? "Sem Descrição" : "Descrição"}
           {...rest}
           autoComplete="false"
           value={invDescription ? invDescription : description}

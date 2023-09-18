@@ -7,24 +7,25 @@ export const Container = styled.header`
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
   display: flex;
-  justify-content: space-between;
-  padding: 0 80px;
+  align-items: center;
+  padding-left: 2rem;
 `;
 
 export const Profile = styled.a`
   display: flex;
   align-items: center;
+  flex: 1;
 
   > img {
     width: 56px;
     height: 56px;
     border-radius: 50%;
+    margin-right: 1rem;
   }
 
   > div {
     display: flex;
     flex-direction: column;
-    margin-left: 16px;
     line-height: 24px;
 
     span {
@@ -37,11 +38,26 @@ export const Profile = styled.a`
       color: ${({ theme }) => theme.COLORS.WHITE};
     }
   }
+  @media screen and (max-width: 870px) {
+    > div {
+      display: none;
+    }
+  }
 `;
+
+export const Logo = styled.div`
+  font-family: "Play", sans-serif;
+  text-align: center;
+  color: ${({ theme }) => theme.COLORS.WHITE};
+  flex: 2;
+  margin-left: -2rem;
+`;
+
 
 export const Logout = styled.button`
   border: none;
   background: none;
+  flex: 1;
 
   > svg {
     color: ${({ theme }) => theme.COLORS.WHITE};
