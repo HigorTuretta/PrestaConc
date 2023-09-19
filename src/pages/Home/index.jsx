@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 
 export function Home() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [trips, setTrips] = useState([]);
 
   function handleCreateTrip() {
@@ -23,8 +24,14 @@ export function Home() {
 
   useEffect(() => {
     async function fetchTrips() {
-      const res = await api.get("/trips");
-      setTrips(res.data);
+      try {
+        const res = await api.get("/trips");
+        setTrips(res.data);
+        setLoading(false); // Marca o carregamento como concluído
+      } catch (error) {
+        console.error("Erro ao buscar viagens:", error);
+        setLoading(false); // Marca o carregamento como concluído mesmo em caso de erro
+      }
     }
 
     fetchTrips();
@@ -34,7 +41,7 @@ export function Home() {
     <Container>
       <Header />
       <Title title="Suas Viagens" />
-      {trips === undefined ? (
+      {loading ? (
         <Loader />
       ) : (
         <main>
@@ -44,16 +51,15 @@ export function Home() {
               onClick={() => handleCreateTrip()}
             />
           </div>
-          {trips &&
-            trips.map((trip) => (
-              <TripCard
-                title={`${trip.city} / ${trip.uf.toUpperCase()}`}
-                dataLeave={formatDate(new Date(trip.dataLeave))}
-                dataReturn={formatDate(new Date(trip.dataReturn))}
-                key={String(trip.trip_id)}
-                onClick={() => handleTripDetails(trip.trip_id)}    
-              />
-            ))}
+          {trips.map((trip) => (
+            <TripCard
+              title={`${trip.city} / ${trip.uf.toUpperCase()}`}
+              dataLeave={formatDate(new Date(trip.dataLeave))}
+              dataReturn={formatDate(new Date(trip.dataReturn))}
+              key={String(trip.trip_id)}
+              onClick={() => handleTripDetails(trip.trip_id)}    
+            />
+          ))}
         </main>
       )}
     </Container>
