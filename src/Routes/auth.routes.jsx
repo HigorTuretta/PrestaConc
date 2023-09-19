@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
-import { SignIn } from "../Pages/SignIn";
-import { SignUp } from "../Pages/SignUp";
+import { SignIn } from "../pages/SignIn";
+import { SignUp } from "../pages/SignUp";
 
 export function AuthRoutes() {
   return (
