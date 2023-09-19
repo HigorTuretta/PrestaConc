@@ -3,7 +3,7 @@ import { Header } from "../../components/Header";
 import { ValueCard } from "../../components/ValueCard";
 import { DateTimeCard } from "../../components/DateTimeCard";
 import { Invoice } from "../../components/Invoice";
-import { Title } from "../../Components/Title";
+import { Title } from "../../components/Title";
 import { SubTitle } from "../../components/SubTitle";
 import { Modal } from "../../components/Modal";
 import { Loader } from "../../components/Loader";

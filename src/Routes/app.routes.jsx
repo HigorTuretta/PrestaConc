@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 
 
-import { CadTrip } from "../Pages/CadTrip";
-import { Home } from "../Pages/Home";
-import { TripDetails } from "../Pages/TripDetails";
+import { CadTrip } from "../pages/CadTrip";
+import { Home } from "../pages/Home";
+import { TripDetails } from "../pages/TripDetails";
 
 export function AppRoutes() {
   return (
