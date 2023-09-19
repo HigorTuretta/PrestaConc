@@ -19,6 +19,7 @@ import { FaTrashCan, FaTriangleExclamation } from "react-icons/fa6";
 
 export function TripDetails() {
   const params = useParams();
+  const [loading, setLoading] = useState(true);
   const [invoices, setInvoices] = useState([]);
   const [dateLeft, setDateLeft] = useState();
   const [dateReturn, setDateReturn] = useState();
@@ -38,7 +39,7 @@ export function TripDetails() {
   const handleModalResponse = (response) => {
     setUserResponse(response);
     setShowModal(false);
-    response &&  handleDeleteTrip();
+    response && handleDeleteTrip();
   };
 
   const handleInputChange = (invDescription, invValue) => {
@@ -131,6 +132,8 @@ export function TripDetails() {
       dataReturn: dateReturn,
       dailyTotal: totalValue,
       totalSpend: amountSpend,
+    }).then(() => {
+      setLoading(false); // Marca o carregamento como concluído
     });
   }, [totalValue]);
 
@@ -145,13 +148,19 @@ export function TripDetails() {
 
   useEffect(() => {
     async function fetchTripData() {
-      const res = await api.get(`/details/${params.id}`);
+      try {
+        const res = await api.get(`/details/${params.id}`);
 
-      setTripData(res.data.tripData[0]);
-      setInvoices(res.data.tripNotes);
-      setDateLeft(new Date(res.data.tripData[0].dataLeave));
-      setDateReturn(new Date(res.data.tripData[0].dataReturn));
-      setAmountSpend(res.data.tripData[0].totalSpend);
+        setTripData(res.data.tripData[0]);
+        setInvoices(res.data.tripNotes);
+        setDateLeft(new Date(res.data.tripData[0].dataLeave));
+        setDateReturn(new Date(res.data.tripData[0].dataReturn));
+        setAmountSpend(res.data.tripData[0].totalSpend);
+        setLoading(false); // Marca o carregamento como concluído
+      } catch (error) {
+        console.error("Erro ao buscar dados da viagem:", error);
+        setLoading(false); // Marca o carregamento como concluído mesmo em caso de erro
+      }
     }
 
     fetchTripData();
@@ -161,7 +170,7 @@ export function TripDetails() {
     <Container>
       <Header />
       <Title title="Detalhes da Viagem" returnButton goTo="/" />
-      {tripData === undefined ? (
+      {loading ? (
         <Loader />
       ) : (
         <main>
@@ -235,7 +244,6 @@ export function TripDetails() {
           buttonTrue="Sim, deletar"
           buttonFalse="Cancelar"
           onResponse={handleModalResponse}
-          
         />
       )}
     </Container>
