@@ -34,7 +34,6 @@ export function Invoice({
       toaster.push(message, { placement: "bottomCenter", duration: 5000 });
       return;
     }
-
     onInputChange(description, value);
     setDescription("");
     setValue("");
@@ -79,7 +78,7 @@ export function Invoice({
           readOnly={readOnly}
         />
         <input
-          type={invValue ? "text" : "number"}
+          type='number'
           placeholder="Valor"
           step="0.01"
           {...rest}
@@ -87,6 +86,7 @@ export function Invoice({
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
           readOnly={readOnly}
+
         />
       </InvoiceDetails>
       <Line $isnew={isNew} />

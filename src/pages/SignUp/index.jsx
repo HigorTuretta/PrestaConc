@@ -85,6 +85,10 @@ export function SignUp() {
       });
   }
 
+  function handleKeyPress(e){   
+    e.key === 'Enter' && handleRegister()
+  }
+
   useEffect(() => {
     setIsLoading(false);
   }, []);
@@ -122,6 +126,7 @@ export function SignUp() {
             icon={FiLock}
             title="Repita sua senha"
             onChange={(e) => setRepeatPassword(e.target.value)}
+            onKeyDown={(e) => handleKeyPress(e)}
           />
           <Button
             loading={isLoading}

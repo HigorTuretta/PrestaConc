@@ -119,7 +119,6 @@ export function TripDetails() {
       });
     });
   };
-
   useEffect(() => {
     if (dateLeft && dateReturn) {
       setTotalValue(compareDate(dateLeft, dateReturn));
