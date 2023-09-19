@@ -20,6 +20,7 @@ export const ModalArea = styled.div`
   align-items: center;
   flex-direction: column;
   width: 80%;
+  max-width: 720px;
   min-height: 10rem;
   border-radius: 15px;
   color: ${({ theme }) => theme.COLORS.WHITE};
