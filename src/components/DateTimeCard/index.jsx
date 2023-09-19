@@ -1,50 +1,32 @@
 import { Container, InputArea } from "./styles";
-import { DatePicker, Stack } from "rsuite";
-import "rsuite/dist/rsuite.min.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { formatDate } from "../../utils/formatDate"; // Substitua "suaFuncaoUtils" pelo caminho correto do seu arquivo de utilitário
 
 export function DateTimeCard({ title, onDateChange, dateValue }) {
-  const locale = {
-    sunday: "Dom",
-    monday: "Seg",
-    tuesday: "Ter",
-    wednesday: "Qua",
-    thursday: "Qui",
-    friday: "Sex",
-    saturday: "Sáb",
-    today: "Hoje",
-    yesterday: "Ontem",
-    hours: "Horas",
-    minutes: "Minutos",
-    seconds: "Segundos",
-  };
+  const [date, setDate] = useState(new Date());
 
-  const [date, setDate] = useState(new Date())
+  useEffect(() => {
+    if (dateValue) {
+      // Formate a data usando sua função formatDate
+      const formattedDate = formatDate(dateValue, "yyyy-MM-dd'T'HH:mm");
+      setDate(formattedDate);
+    }
+  }, [dateValue]);
 
-  function handleDateChange(value){
+  function handleDateChange(value) {
     setDate(value);
-    onDateChange(value);
+    onDateChange(new Date(value));
   }
-
 
   return (
     <Container>
       <h5>{title}</h5>
       <InputArea>
-        <Stack direction="column" alignItems="flex-start" spacing={6}>
-          <DatePicker           
-            value={dateValue ? dateValue: date}
-            onChange={(selectedDate) => handleDateChange(selectedDate)}
-            locale={locale}
-            format="dd/MM/yyyy HH:mm"
-            ranges={[
-              {
-                label: "Hoje",
-                value: new Date(),
-              },
-            ]}
-          />
-        </Stack>
+        <input
+          type="datetime-local"
+          value={date}
+          onChange={(e) => handleDateChange(e.target.value)}
+        />
       </InputArea>
     </Container>
   );

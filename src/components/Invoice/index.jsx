@@ -31,7 +31,7 @@ export function Invoice({
           Informe um valor para a nota fiscal!
         </Message>
       );
-      toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+      toaster.push(message, { placement: "topEnd", duration: 5000 });
       return;
     }
     onInputChange(description, value);
@@ -78,15 +78,14 @@ export function Invoice({
           readOnly={readOnly}
         />
         <input
-          type='number'
+          type={!isNew ? "text" : "number"}
           placeholder="Valor"
           step="0.01"
           {...rest}
-          value={invValue ? invValue : value}
+          value={invValue ? `R$ ${invValue}` : value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
           readOnly={readOnly}
-
         />
       </InvoiceDetails>
       <Line $isnew={isNew} />

@@ -107,7 +107,7 @@ export function TripDetails() {
 
   const handleDeleteTrip = () => {
     api.delete(`/trips/${params.id}`).then(() => {
-      navigate('/');
+      navigate("/");
       const message = (
         <Message type="success" showIcon closable>
           Viagem deletada com sucesso.
@@ -126,14 +126,18 @@ export function TripDetails() {
   }, [dateLeft, dateReturn]);
 
   useEffect(() => {
-    api.put(`details/${params.id}`, {
-      dataLeave: dateLeft,
-      dataReturn: dateReturn,
-      dailyTotal: totalValue,
-      totalSpend: amountSpend,
-    }).then(() => {
-      setLoading(false); // Marca o carregamento como concluído
-    });
+    console.log(dateLeft, dateReturn);
+
+    api
+      .put(`details/${params.id}`, {
+        dataLeave: dateLeft,
+        dataReturn: dateReturn,
+        dailyTotal: totalValue,
+        totalSpend: amountSpend,
+      })
+      .then(() => {
+        setLoading(false); // Marca o carregamento como concluído
+      });
   }, [totalValue]);
 
   useEffect(() => {
@@ -227,7 +231,7 @@ export function TripDetails() {
                   key={invoice.id}
                   dateTime={formatDate(new Date(invoice.created_at))}
                   invDescription={invoice.description}
-                  invValue={`R$ ${invoice.value}`}
+                  invValue={invoice.value}
                   onDelete={() => handleDeleteInvoice(invoice.id)}
                   readOnly
                   entranceAnimation
