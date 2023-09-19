@@ -8,6 +8,7 @@ import { formatDate } from '../../utils/formatDate'
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useState, useEffect } from "react";
+
 export function Home() {
   const navigate = useNavigate();
   const [trips, setTrips] = useState([]);
