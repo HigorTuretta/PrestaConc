@@ -18,10 +18,16 @@ export const Container = styled.div`
     .city-area button {
       padding: 0.5rem;
       background-color: transparent;
-      border: solid 1px ${({theme}) => theme.COLORS.RED};
-      color: ${({theme}) => theme.COLORS.RED};
+      border: solid 1px ${({ theme }) => theme.COLORS.RED};
+      color: ${({ theme }) => theme.COLORS.RED};
       border-radius: 5px;
       text-align: center;
+    }
+
+    @media screen and (max-width: 530px) {
+      .dateCard {
+        flex-wrap: wrap;
+      }
     }
   }
 `;

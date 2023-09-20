@@ -34,6 +34,24 @@ export const InputArea = styled.div`
     font-family: "Roboto Condensed", sans-serif;
     margin: 0 0.4rem;
   }
+
+  >input{
+    all: unset;
+    background-color: transparent;
+    outline: none;
+    font-family: "Roboto Slab";
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    
+    border-bottom: 1px solid ${({ theme }) => theme.COLORS.WHITE};
+    
+    color: ${({ theme }) => theme.COLORS.WHITE};
+  }
+
+  >input:focus{
+    outline: none;
+    background-color: transparent;
+  }
   
   @media screen and (max-width: 680px) {
     flex-wrap: wrap;

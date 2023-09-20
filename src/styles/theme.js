@@ -12,5 +12,6 @@ export default {
     GRAY_300: "#666360",
 
     RED: "#D74646",
+    GREEN: '#42AB59'
   },
 };
