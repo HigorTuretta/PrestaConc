@@ -6,8 +6,9 @@ import { ButtonText } from "../../components/ButtonText";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { api } from "../../services/api";
-import { Message, useToaster } from "rsuite";
 import { isEmail } from "validator";
+import { Notification} from '../../components/Notification'
+
 
 export function SignUp() {
   const navigate = useNavigate();
@@ -16,71 +17,57 @@ export function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
-  const toaster = useToaster();
+  const [notification, setNotification] = useState(null)
+
+
+  const showNotification = (message, type) => {
+    const notification = (
+      <Notification
+        message={message}
+        type={type}
+        onClose={() => {
+          setTimeout(() => {
+            setNotification(null);
+          }, 500);
+        }}
+      />
+    );
+    setNotification(notification);
+  };
 
   function handleRegister() {
     setIsLoading(true);
 
     if (!name || !email || !password || !repeatPassword) {
       setIsLoading(false);
-      const message = (
-        <Message type="warning" showIcon closable>
-          Preencha todos os campos.
-        </Message>
-      );
-      toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+      showNotification('Preencha todos os campos para continuar!', 'error')
       return;
     }
 
     if (!isEmail(email)){
       setIsLoading(false);
-      const message = (
-        <Message type="warning" showIcon closable>
-          Informe um email válido!
-        </Message>
-      );
-      toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+      showNotification('Informe um email válido!', 'error')
       return;
     }
 
     if (password !== repeatPassword) {
       setIsLoading(false);
-      const message = (
-        <Message type="warning" showIcon closable>
-          As senhas não são as mesmas.
-        </Message>
-      );
-      toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+      showNotification('As senhas não são as mesmas.', 'error')
       return;
     }
 
     api
       .post("/users/register", { name, email, password })
       .then(() => {
-        const message = (
-          <Message type="success" showIcon closable>
-            Usuário criado com sucesso!
-          </Message>
-        );
-        toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+        showNotification('Usuário criado com sucesso!', 'success')
         navigate("/");
       })
       .catch((err) => {
         setIsLoading(false);
-        if (err.response) {
-          const message = (
-            <Message type="error" showIcon closable>
-              {err.response.data.message}
-            </Message>
-          );
-          toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+        if (err.response.data) {
+         showNotification(err.response.data.message, 'error')
         } else {
-          const message = (
-            <Message type="error" showIcon closable>
-              {err.message} | Não foi possivel realizar o cadastro.
-            </Message>
-          );
-          toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+          showNotification(`${err.message} | Não foi possível realizar o cadastro.`)
         }
       });
   }
@@ -140,6 +127,7 @@ export function SignUp() {
           onClick={() => navigate("/")}
         />
       </Form>
+      {notification}
     </Container>
   );
 }

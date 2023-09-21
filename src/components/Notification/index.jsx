@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { NotificationWrapper } from "./styles"; // Importando o estilo do arquivo styles.js
+import { FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 
-function Notification({ message, type, onClose }) {
+export function Notification({ message, type, onClose }) {
   const [visible, setVisible] = useState(true);
 
-  useEffect(() => {    
+  useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(false);
       onClose();
@@ -14,11 +15,13 @@ function Notification({ message, type, onClose }) {
       clearTimeout(timer);
     };
   }, [onClose]);
-  
 
   return (
     <NotificationWrapper $isvisible={visible} $type={type}>
-      {message}
+      <div>
+        {type === "error" ? <FaExclamationTriangle /> : <FaCheckCircle />}
+      </div>
+      <span>{message}</span>
     </NotificationWrapper>
   );
 }

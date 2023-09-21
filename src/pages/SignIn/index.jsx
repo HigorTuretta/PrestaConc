@@ -6,6 +6,7 @@ import { ButtonText } from "../../components/ButtonText";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
+import { Notification }from '../../components/Notification'
 
 export function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
@@ -13,15 +14,39 @@ export function SignIn() {
   const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [notification, setNotification] = useState(null)
+
+  const showNotification = (message, type) => {
+    const notification = (
+      <Notification
+        message={message}
+        type={type}
+        onClose={() => {
+          setTimeout(() => {
+            setNotification(null);
+          }, 500);
+        }}
+      />
+    );
+    setNotification(notification);
+  };
+
 
   function handleLogin() {
     setIsLoading(true);
+
+    if (!email || !password){
+      showNotification('Informe seu email e/ou senha!', 'error')
+      setIsLoading(false)
+      return
+    }
 
     signIn({ email, password })
       .then(() => {
         setIsLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        showNotification(`Erro ao realizar login: ${err.message}`, 'error')
         setIsLoading(false);
       });
   }
@@ -72,6 +97,7 @@ export function SignIn() {
         />
       </Form>
       <Background />
+      {notification}
     </Container>
   );
 }

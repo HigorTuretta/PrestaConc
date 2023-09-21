@@ -6,27 +6,42 @@ import { Title } from "../../components/Title";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
-import { Message, useToaster } from "rsuite";
+import { Notificaion } from "../../components/Notification";
 
 export function CadTrip() {
   const [uf, setUf] = useState("");
   const [city, setCity] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [notification, setNotification] = useState(null);
 
   const navigate = useNavigate();
-  const toaster = useToaster();
+
+  const showNotification = (message, type) => {
+    const notification = (
+      <Notification
+        message={message}
+        type={type}
+        onClose={() => {
+          setTimeout(() => {
+            setNotification(null);
+          }, 500);
+        }}
+      />
+    );
+    setNotification(notification);
+  };
 
   function handleCadTrip() {
+    if (!city || uf) {
+      showNotification("Informe o UF e/ou a  Cidade para continuar!", "error");
+      return;
+    }
+
     api
       .post("/trips/", { uf, city })
       .then((res) => {
         const trip_id = res.data[0];
-        const message = (
-          <Message type="success" showIcon closable>
-            Viagem adicionada com sucesso!
-          </Message>
-        );
-        toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+        showNotification("Viagem criada com sucesso!", "success");
         const initialDateLeft = new Date();
         const initialDateReturn = new Date();
         initialDateReturn.setDate(initialDateLeft.getDate() + 1);
@@ -43,41 +58,28 @@ export function CadTrip() {
             navigate(`/details/${trip_id}`);
           })
           .catch((err) => {
-            const message = (
-              <Message type="error" showIcon closable>
-                Erro ao redirecionar ou cadastrar dados da viagem. Erro:{" "}
-                {err.message}
-              </Message>
+            showNotification(
+              "Erro ao redirecionar ou adicionar dados da viagem!",
+              "error"
             );
-            toaster.push(message, {
-              placement: "bottomCenter",
-              duration: 5000,
-            });
             navigate(-1);
           });
       })
       .catch((err) => {
         setIsLoading(false);
         if (err.response) {
-          const message = (
-            <Message type="error" showIcon closable>
-              {err.response.data.message}
-            </Message>
-          );
-          toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+          showNotification(err.response.data.message, "error");
         } else {
-          const message = (
-            <Message type="error" showIcon closable>
-              {err.message} | Não foi possivel realizar o cadastro.
-            </Message>
+          showNotification(
+            `${err.message} | Não foi possivel realizar o cadastro.`,
+            "error"
           );
-          toaster.push(message, { placement: "bottomCenter", duration: 5000 });
         }
       });
   }
 
-  function handleKeyPress(e){   
-    e.key === 'Enter' && handleCadTrip()
+  function handleKeyPress(e) {
+    e.key === "Enter" && handleCadTrip();
   }
 
   useEffect(() => {
@@ -106,6 +108,7 @@ export function CadTrip() {
         </Form>
         <Button title="Confirmar" loading={isLoading} onClick={handleCadTrip} />
       </main>
+      {notification}
     </Container>
   );
 }

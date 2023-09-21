@@ -7,7 +7,7 @@ import {
 } from "./styles";
 import { FiTrash2, FiPlus } from "react-icons/fi";
 import { useState } from "react";
-import { Message, useToaster } from "rsuite";
+import { Notification } from "../Notification";
 
 export function Invoice({
   dateTime,
@@ -22,16 +22,26 @@ export function Invoice({
 }) {
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
-  const toaster = useToaster();
+  const [notification, setNotification] = useState(null); // Estado para controlar a notificação
+
+  const showNotification = (message, type) => {
+    const notification = (
+      <Notification
+        message={message}
+        type={type}
+        onClose={() => {
+          setTimeout(() => {
+            setNotification(null);
+          }, 500);
+        }}
+      />
+    );
+    setNotification(notification);
+  };
 
   function handleAddClick() {
     if (value === "" || value === 0) {
-      const message = (
-        <Message type="error" showIcon closable>
-          Informe um valor para a nota fiscal!
-        </Message>
-      );
-      toaster.push(message, { placement: "topEnd", duration: 5000 });
+      showNotification("Informe um valor para nota fiscal!", "error");
       return;
     }
     onInputChange(description, value);
@@ -89,6 +99,7 @@ export function Invoice({
         />
       </InvoiceDetails>
       <Line $isnew={isNew} />
+      {notification}
     </Container>
   );
 }

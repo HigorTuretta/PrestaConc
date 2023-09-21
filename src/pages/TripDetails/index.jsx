@@ -1,34 +1,34 @@
-import React, { useEffect } from 'react';
-import { Container, CardArea, InvoiceArea } from './styles';
-import { Header } from '../../components/Header';
-import { ValueCard } from '../../components/ValueCard';
-import { DateTimeCard } from '../../components/DateTimeCard';
-import { Invoice } from '../../components/Invoice';
-import { Title } from '../../components/Title';
-import { SubTitle } from '../../components/SubTitle';
-import { Modal } from '../../components/Modal';
-import { Loader } from '../../components/Loader';
-import { formatDate } from '../../utils/formatDate';
-import { compareDate } from '../../utils/dateDiff';
-import { api } from '../../services/api';
-import { useParams, useNavigate } from 'react-router-dom';
-import mapIcon from '../../assets/Map.png';
-import walletIcon from '../../assets/Wallet.png';
-import { FaTrashCan, FaTriangleExclamation } from 'react-icons/fa6';
-import Notification from '../../components/Notification'; // Importe o componente Notification
+import { useEffect, useState } from "react";
+import { Container, CardArea, InvoiceArea } from "./styles";
+import { Header } from "../../components/Header";
+import { ValueCard } from "../../components/ValueCard";
+import { DateTimeCard } from "../../components/DateTimeCard";
+import { Invoice } from "../../components/Invoice";
+import { Title } from "../../components/Title";
+import { SubTitle } from "../../components/SubTitle";
+import { Modal } from "../../components/Modal";
+import { Loader } from "../../components/Loader";
+import { formatDate } from "../../utils/formatDate";
+import { compareDate } from "../../utils/dateDiff";
+import { api } from "../../services/api";
+import { useParams, useNavigate } from "react-router-dom";
+import mapIcon from "../../assets/Map.png";
+import walletIcon from "../../assets/Wallet.png";
+import { FaTrashCan, FaTriangleExclamation } from "react-icons/fa6";
+import Notification from "../../components/Notification"; 
 
 export function TripDetails() {
   const params = useParams();
-  const [loading, setLoading] = React.useState(true);
-  const [invoices, setInvoices] = React.useState([]);
-  const [dateLeft, setDateLeft] = React.useState();
-  const [dateReturn, setDateReturn] = React.useState();
-  const [totalValue, setTotalValue] = React.useState(0);
-  const [amountSpend, setAmountSpend] = React.useState(0);
-  const [tripData, setTripData] = React.useState();
-  const [showModal, setShowModal] = React.useState(false);
-  const [userResponse, setUserResponse] = React.useState(null);
-  const [notification, setNotification] = React.useState(null); // Estado para controlar a notificação
+  const [loading, setLoading] = useState(true);
+  const [invoices, setInvoices] = useState([]);
+  const [dateLeft, setDateLeft] = useState();
+  const [dateReturn, setDateReturn] = useState();
+  const [totalValue, setTotalValue] = useState(0);
+  const [amountSpend, setAmountSpend] = useState(0);
+  const [tripData, setTripData] = useState();
+  const [showModal, setShowModal] = useState(false);
+  const [userResponse, setUserResponse] = useState(null);
+  const [notification, setNotification] = useState(null); // Estado para controlar a notificação
 
   const navigate = useNavigate();
 
@@ -44,7 +44,15 @@ export function TripDetails() {
 
   const showNotification = (message, type) => {
     const notification = (
-      <Notification message={message} type={type} onClose={() => setNotification(null)} />
+      <Notification
+        message={message}
+        type={type}
+        onClose={() => {
+          setTimeout(() => {
+            setNotification(null);
+          }, 500);
+        }}
+      />
     );
     setNotification(notification);
   };
@@ -63,7 +71,7 @@ export function TripDetails() {
           id: res.data[0],
         };
         setInvoices([...invoices, newInvoice]);
-        showNotification('Nota Adicionada', 'success');
+        showNotification("Nota Adicionada", "success");
       });
   };
 
@@ -73,10 +81,10 @@ export function TripDetails() {
         setInvoices((updatedInvoices) =>
           updatedInvoices.filter((invoice) => invoice.id !== invoiceId)
         );
-        showNotification('Nota Removida', 'success');
+        showNotification("Nota Removida", "success");
       });
     } catch (error) {
-      showNotification('Falha ao remover Nota.', 'error');
+      showNotification("Falha ao remover Nota.", "error");
     }
   };
 
@@ -91,7 +99,7 @@ export function TripDetails() {
   const handleDeleteTrip = () => {
     api.delete(`/trips/${params.id}`).then(() => {
       navigate("/");
-      showNotification('Viagem deletada com sucesso.', 'success');
+      showNotification("Viagem deletada com sucesso.", "success");
     });
   };
 
@@ -110,7 +118,7 @@ export function TripDetails() {
         totalSpend: amountSpend,
       })
       .then(() => {
-        setLoading(false);       
+        setLoading(false);
       });
   }, [totalValue]);
 
