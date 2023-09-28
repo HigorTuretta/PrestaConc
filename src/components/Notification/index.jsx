@@ -26,4 +26,22 @@ export function Notification({ message, type, onClose }) {
   );
 }
 
-export default Notification;
+/*
+implementation:
+
+const showNotification = (message, type) => {
+  const notification = (
+    <Notification
+      message={message}
+      type={type}
+      onClose={() => {
+        setTimeout(() => {
+          setNotification(null);
+        }, 500);
+      }}
+    />
+  );
+  setNotification(notification);
+};
+
+*/

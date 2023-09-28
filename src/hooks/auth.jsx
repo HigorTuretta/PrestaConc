@@ -1,13 +1,28 @@
 import { createContext } from "react";
 import { useContext, useState, useEffect } from "react";
 import { api } from "../services/api";
-import { useToaster, Message } from "rsuite";
+import { Notification } from "../components/Notification";
 
 export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
   const [data, setData] = useState({});
-  const toaster = useToaster();
+  const [notification, setNotification] = useState(null);
+
+  const showNotification = (message, type) => {
+    const notification = (
+      <Notification
+        message={message}
+        type={type}
+        onClose={() => {
+          setTimeout(() => {
+            setNotification(null);
+          }, 500);
+        }}
+      />
+    );
+    setNotification(notification);
+  };
 
   async function signIn({ email, password }) {
     try {
@@ -19,19 +34,10 @@ function AuthProvider({ children }) {
       setData({ user, token });
     } catch (error) {
       if (error.response) {
-        const message = (
-          <Message type="error" showIcon closable>
-            {error.response.data.message}
-          </Message>
-        );
-        toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+        console.log(error.response)
+        showNotification(error.response.data.message, "error");
       } else {
-        const message = (
-          <Message type="error" showIcon closable>
-            'Não foi possível realizar o login.'
-          </Message>
-        );
-        toaster.push(message, { placement: "bottomCenter", duration: 5000 });
+        showNotification("Não foi possível realizar o login.", "error");
       }
     }
   }
@@ -62,6 +68,7 @@ function AuthProvider({ children }) {
       }}
     >
       {children}
+      {notification}
     </AuthContext.Provider>
   );
 }

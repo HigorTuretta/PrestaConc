@@ -1,7 +1,23 @@
-import { DateTime } from 'luxon';
+import { format, utcToZonedTime } from "date-fns-tz";
 
-export function formatDate(inputDate, format = 'dd/MM/yyyy HH:mm') {
-  const date = DateTime.fromJSDate(inputDate, { zone: 'America/Sao_Paulo' });
-  
-  return date.toFormat(format);
+export function formatDate(
+  inputDate,
+  formatString = "dd/MM/yyyy HH:mm",
+  timeZone = "America/Sao_Paulo"
+) {
+  const zonedDate = utcToZonedTime(inputDate, timeZone);
+  return format(zonedDate, formatString, { timeZone });
+}
+
+// Função para formatar uma data para o horário de Brasília
+export function localeDate(data) {
+  // Definir o fuso horário de Brasília (GMT-3)
+  const fusoHorarioBrasilia = "America/Sao_Paulo";
+
+  // Formatar a data e hora no fuso horário de Brasília
+  const formatoBrasilia = format(data, "yyyy-MM-dd HH:mm:ss", {
+    timeZone: fusoHorarioBrasilia,
+  });
+
+  return formatoBrasilia;
 }

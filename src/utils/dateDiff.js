@@ -1,7 +1,7 @@
 import datetimeDifference from "datetime-difference";
 
 export function compareDate(date1, date2) {
-  const result = datetimeDifference(date1, date2);
+  const result = datetimeDifference(new Date(date1), new Date(date2));
 
   const days = result.days;
   const hours = result.hours;

@@ -4,7 +4,8 @@ import { Header } from "../../components/Header";
 import { Title } from "../../components/Title";
 import { Button } from "../../components/Button";
 import { Loader } from "../../components/Loader";
-import { formatDate } from '../../utils/formatDate'
+import { Notification } from "../../components/Notification";
+import { formatDate } from "../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useState, useEffect } from "react";
@@ -13,6 +14,22 @@ export function Home() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [trips, setTrips] = useState([]);
+  const [notification, setNotification] = useState(null);
+
+  const showNotification = (message, type) => {
+    const notification = (
+      <Notification
+        message={message}
+        type={type}
+        onClose={() => {
+          setTimeout(() => {
+            setNotification(null);
+          }, 500);
+        }}
+      />
+    );
+    setNotification(notification);
+  };
 
   function handleCreateTrip() {
     navigate("/new");
@@ -29,7 +46,7 @@ export function Home() {
         setTrips(res.data);
         setLoading(false); // Marca o carregamento como concluído
       } catch (error) {
-        console.error("Erro ao buscar viagens:", error);
+        showNotification("Erro ao buscar viagens:", "error");
         setLoading(false); // Marca o carregamento como concluído mesmo em caso de erro
       }
     }
@@ -57,11 +74,12 @@ export function Home() {
               dataLeave={formatDate(new Date(trip.dataLeave))}
               dataReturn={formatDate(new Date(trip.dataReturn))}
               key={String(trip.trip_id)}
-              onClick={() => handleTripDetails(trip.trip_id)}    
+              onClick={() => handleTripDetails(trip.trip_id)}
             />
           ))}
         </main>
       )}
+      {notification}
     </Container>
   );
 }

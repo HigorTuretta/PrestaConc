@@ -51,15 +51,31 @@ export const City = styled.div`
     font-weight: 700;
     line-height: normal;
   }
+
+  @media screen and (max-width: 480px) {
+    > h4 {
+      font-size: 1.2rem;
+    }
+    >span{
+     font-size: 0.6rem;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    >h4{
+      font-size: 1rem;
+    }
+  }
 `;
 
 export const TripData = styled.div`
   font-family: Roboto Slab;
   font-weight: 400;
   height: 100%;
+  width: 130px;
   display: flex;
   justify-content: space-around;
-  align-items: flex-end;
+  align-items: stretch;
   flex-direction: column;
 
   > div {

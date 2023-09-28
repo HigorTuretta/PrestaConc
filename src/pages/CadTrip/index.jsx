@@ -6,7 +6,8 @@ import { Title } from "../../components/Title";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
-import { Notificaion } from "../../components/Notification";
+import { Notification } from "../../components/Notification";
+import { formatDate, localeDate } from "../../utils/formatDate";
 
 export function CadTrip() {
   const [uf, setUf] = useState("");
@@ -32,7 +33,7 @@ export function CadTrip() {
   };
 
   function handleCadTrip() {
-    if (!city || uf) {
+    if (!city || !uf) {
       showNotification("Informe o UF e/ou a  Cidade para continuar!", "error");
       return;
     }
@@ -44,7 +45,7 @@ export function CadTrip() {
         showNotification("Viagem criada com sucesso!", "success");
         const initialDateLeft = new Date();
         const initialDateReturn = new Date();
-        initialDateReturn.setDate(initialDateLeft.getDate() + 1);
+        initialDateReturn.setDate(initialDateReturn.getDate() + 1);
 
         api
           .post("/details", {

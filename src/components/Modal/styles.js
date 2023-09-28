@@ -49,8 +49,12 @@ export const ButtonArea = styled.div`
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
   > button {
+    all: unset;
     padding: 0.3rem 0.5rem;
     border-radius: 5px;
+  }
+  >button:hover {
+    cursor: pointer;
   }
   > button:first-child {
     background-color: #42ab59;

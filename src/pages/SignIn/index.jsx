@@ -1,12 +1,12 @@
 import { Input } from "../../components/Input";
-import { Container, Form, Background } from "./styles";
+import { Container, Form, Background, Logo } from "./styles";
 import { FiMail, FiLock } from "react-icons/fi";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
-import { Notification }from '../../components/Notification'
+import { Notification } from "../../components/Notification";
 
 export function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +14,7 @@ export function SignIn() {
   const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [notification, setNotification] = useState(null)
+  const [notification, setNotification] = useState(null);
 
   const showNotification = (message, type) => {
     const notification = (
@@ -31,14 +31,13 @@ export function SignIn() {
     setNotification(notification);
   };
 
-
   function handleLogin() {
     setIsLoading(true);
 
-    if (!email || !password){
-      showNotification('Informe seu email e/ou senha!', 'error')
-      setIsLoading(false)
-      return
+    if (!email || !password) {
+      showNotification("Informe seu email e/ou senha!", "error");
+      setIsLoading(false);
+      return;
     }
 
     signIn({ email, password })
@@ -46,13 +45,13 @@ export function SignIn() {
         setIsLoading(false);
       })
       .catch((err) => {
-        showNotification(`Erro ao realizar login: ${err.message}`, 'error')
+        showNotification(`Erro ao realizar login: ${err.message}`, "error");
         setIsLoading(false);
       });
   }
 
-  function handleKeyPress(e){   
-    e.key === 'Enter' && handleLogin()
+  function handleKeyPress(e) {
+    e.key === "Enter" && handleLogin();
   }
 
   useEffect(() => {
@@ -62,11 +61,10 @@ export function SignIn() {
   return (
     <Container>
       <Form>
-        <h1>
-          Olá,
-          <br />
-          Bem vindo!
-        </h1>
+        <Logo>
+          <h1>CALKY</h1>
+          <p>Seu controlador pessoal de viagens.</p>
+        </Logo>
         <div>
           <Input
             placeholder="Seu email"

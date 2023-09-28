@@ -8,14 +8,14 @@ import { Title } from "../../components/Title";
 import { SubTitle } from "../../components/SubTitle";
 import { Modal } from "../../components/Modal";
 import { Loader } from "../../components/Loader";
-import { formatDate } from "../../utils/formatDate";
+import { formatDate, localeDate } from "../../utils/formatDate";
 import { compareDate } from "../../utils/dateDiff";
 import { api } from "../../services/api";
 import { useParams, useNavigate } from "react-router-dom";
 import mapIcon from "../../assets/Map.png";
 import walletIcon from "../../assets/Wallet.png";
 import { FaTrashCan, FaTriangleExclamation } from "react-icons/fa6";
-import Notification from "../../components/Notification"; 
+import { Notification } from "../../components/Notification";
 
 export function TripDetails() {
   const params = useParams();
@@ -62,12 +62,13 @@ export function TripDetails() {
       .post(`/invoices/${params.id}`, {
         description: invDescription,
         value: invValue,
+        created_at: localeDate(new Date()),
       })
       .then((res) => {
         const newInvoice = {
           description: invDescription,
           value: invValue,
-          created_at: new Date(),
+          created_at: localeDate(new Date()),
           id: res.data[0],
         };
         setInvoices([...invoices, newInvoice]);
@@ -89,11 +90,11 @@ export function TripDetails() {
   };
 
   const handleDateLeftChange = (date) => {
-    setDateLeft(new Date(date));
+    setDateLeft(localeDate(new Date(date)));
   };
 
   const handleDateReturnChange = (date) => {
-    setDateReturn(new Date(date));
+    setDateReturn(localeDate(new Date(date)));
   };
 
   const handleDeleteTrip = () => {
@@ -120,7 +121,7 @@ export function TripDetails() {
       .then(() => {
         setLoading(false);
       });
-  }, [totalValue]);
+  }, [totalValue, dateLeft, dateReturn]);
 
   useEffect(() => {
     const totalInvoiceValue = invoices.reduce(
@@ -142,7 +143,7 @@ export function TripDetails() {
         setAmountSpend(res.data.tripData[0].totalSpend);
         setLoading(false);
       } catch (error) {
-        console.error("Erro ao buscar dados da viagem:", error);
+        showNotification("Erro ao buscar dados da viagem:", "error");
         setLoading(false);
       }
     }
