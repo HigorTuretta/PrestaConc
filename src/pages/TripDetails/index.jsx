@@ -22,7 +22,7 @@ import { api } from "../../services/api";
 import { useParams, useNavigate } from "react-router-dom";
 import mapIcon from "../../assets/mapIcon.png";
 import walletIcon from "../../assets/walletIcon.png";
-import { FaPlus, FaExclamationTriangle } from "react-icons/fa";
+import { FaPlus, FaExclamationTriangle,FaPlaneArrival,FaPlaneDeparture } from "react-icons/fa";
 import { Notification } from "../../components/Notification";
 
 export function TripDetails() {
@@ -194,12 +194,14 @@ export function TripDetails() {
               type="datetime-local"
               value={dateLeft}
               onChange={(e) => handleDateLeftChange(e.target.value)}
+              icon={FaPlaneDeparture}
             />
             <Input
               title="Data/Hora Retorno"
               type="datetime-local"
               value={dateReturn}
               onChange={(e) => handleDateReturnChange(e.target.value)}
+              icon={FaPlaneArrival}
             />
           </DateArea>
           <ValueArea>

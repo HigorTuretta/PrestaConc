@@ -9,13 +9,14 @@ import { formatDate } from "../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useState, useEffect } from "react";
+import { useAuth } from "../../hooks/auth"; 
 
 export function Home() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [trips, setTrips] = useState([]);
   const [notification, setNotification] = useState(null);
-
+  const {signOut} = useAuth()
   const showNotification = (message, type) => {
     const notification = (
       <Notification
@@ -46,6 +47,10 @@ export function Home() {
         setTrips(res.data);
         setLoading(false); // Marca o carregamento como concluído
       } catch (error) {
+        if ( error.response.data.message === "JWT Token invalido."){
+          navigate('/')
+          signOut();
+        }
         showNotification("Erro ao buscar viagens:", "error");
         setLoading(false); // Marca o carregamento como concluído mesmo em caso de erro
       }

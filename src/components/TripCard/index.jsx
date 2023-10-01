@@ -1,5 +1,5 @@
 import { Container, City, Description, TripData } from "./styles";
-import { FaPlaneArrival, FaPlaneDeparture } from "react-icons/fa6";
+import { FaPlaneArrival, FaPlaneDeparture } from "react-icons/fa";
 export function TripCard({ title, dataLeave, dataReturn, url, ...rest }) {
   return (
     <Container {...rest}>

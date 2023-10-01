@@ -41,7 +41,7 @@ function AuthProvider({ children }) {
       }
     }
   }
-
+  
   function signOut() {
     localStorage.removeItem("@prestaConc:user");
     localStorage.removeItem("@prestaConc:token");

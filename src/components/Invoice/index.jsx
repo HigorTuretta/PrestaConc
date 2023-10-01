@@ -23,7 +23,11 @@ export function Invoice({
           <FiTrash2 onClick={() => handleDeleteClick()} />
           <span>{invDescription}</span>
         </div>
-        <span>{`R$ ${invValue}`}</span>
+        <span>{invValue.toLocaleString("pt-br", {
+                style: "currency",
+                currency: "BRL",
+                minimumFractionDigits: 2
+              })}</span>
       </InvoiceDetails>
       <Line />
     </Container>

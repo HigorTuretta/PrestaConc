@@ -35,7 +35,7 @@ export const Description = styled.div`
 export const City = styled.div`
   
   color: ${({ theme }) => theme.COLORS.WHITE};
-  width: 50%;
+  width: 100%;
   > span {
     font-size: 12px;
     font-weight: 400;
@@ -49,10 +49,10 @@ export const City = styled.div`
 export const TripData = styled.div`
   font-weight: 400;
   height: 100%;
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
-  align-items: stretch;
+  align-items: end;
   flex-direction: column;
 
   > div {
