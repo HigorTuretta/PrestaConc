@@ -1,78 +1,55 @@
 import styled from "styled-components";
-import imgCard from "../../assets/travel.png";
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 350px;
+  width: 100%;
   cursor: pointer;
   transition: all 0.3s;
-  margin: 10px 0;
   border: none;
+  font-family: "Montserrat", sans-serif;
   &:hover {
-    transform: scale(1.01);
+    filter: brightness(0.9)
   }
-
-  @media (max-width: 520px) {
-    width: 90%;
-  }
+  margin-bottom: 1rem;
 `;
 
 export const Description = styled.div`
-  width: 25rem;
+  width: 100%;
   height: 5rem;
   padding: 12px;
   border-radius: 5px;
-  background: url(${imgCard});
+  background: ${({theme}) => theme.COLORS.BLUE};
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.25);
 
-  @media (max-width: 520px) {
-    width: 90%;
-  }
 `;
 
 export const City = styled.div`
-  font-family: Roboto Slab;
+  
   color: ${({ theme }) => theme.COLORS.WHITE};
+  width: 50%;
   > span {
-    font-size: 0.8rem;
+    font-size: 12px;
     font-weight: 400;
   }
   > h4 {
-    font-size: 1.5rem;
-    font-style: normal;
+    font-size:18px;
     font-weight: 700;
-    line-height: normal;
-  }
-
-  @media screen and (max-width: 480px) {
-    > h4 {
-      font-size: 1.2rem;
-    }
-    >span{
-     font-size: 0.6rem;
-    }
-  }
-
-  @media screen and (max-width: 400px) {
-    >h4{
-      font-size: 1rem;
-    }
   }
 `;
 
 export const TripData = styled.div`
-  font-family: Roboto Slab;
   font-weight: 400;
   height: 100%;
-  width: 130px;
+  width: 50%;
   display: flex;
   justify-content: space-around;
   align-items: stretch;
@@ -81,10 +58,13 @@ export const TripData = styled.div`
   > div {
     display: flex;
     gap: 0.5em;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
     flex-direction: row;
     color: ${({ theme }) => theme.COLORS.WHITE};
-    font-size: 0.8rem;
+    
+    p{
+      font-size: 12px;
+    }
   }
 `;

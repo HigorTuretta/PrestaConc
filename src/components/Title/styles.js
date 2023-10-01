@@ -2,31 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  max-width: 720px;
   display: flex;
+  font-family: "Montserrat", sans-serif;
 
-  justify-content: ${({ $returnButton }) =>
-    $returnButton ? "space-between" : "center"};
+  justify-content: space-between;
   align-items: center;
-  margin: 2rem auto 0;
-  padding: 0 2rem;
-
-  @media screen and (max-width:450px) {
-     flex-direction: column;
-    }
+  margin: 2rem 0;
 
   > h1 {
-    color: ${({ theme }) => theme.COLORS.WHITE};
-    font-family: "Roboto Slab", serif;
-    font-size: 2rem;
-
-    
-  @media screen and (max-width:450px) {
-     margin-bottom: 1rem;
-    }
-
-    @media screen and (max-width:350px) {
-     font-size: 1.5rem;
-    }
+    color: ${({ theme }) => theme.COLORS.BLACK};
+    font-size: 26px;
   }
 `;

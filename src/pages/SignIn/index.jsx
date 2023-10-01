@@ -1,5 +1,5 @@
 import { Input } from "../../components/Input";
-import { Container, Form, Background, Logo } from "./styles";
+import { Container, Content, Form, Logo, LoginArea } from "./styles";
 import { FiMail, FiLock } from "react-icons/fi";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
 import { Notification } from "../../components/Notification";
-
 export function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -60,41 +59,51 @@ export function SignIn() {
 
   return (
     <Container>
-      <Form>
+      <Content>
         <Logo>
-          <h1>CALKY</h1>
-          <p>Seu controlador pessoal de viagens.</p>
+          <h1>Calky</h1>
+          <p>Calculador de prestação de contas.</p>
         </Logo>
-        <div>
-          <Input
-            placeholder="Seu email"
-            type="email"
-            icon={FiMail}
-            title="Email"
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={(e) => handleKeyPress(e)}
-          />
-          <Input
-            placeholder="Sua senha"
-            type="password"
-            icon={FiLock}
-            title="Senha"
-            onChange={(e) => setPassword(e.target.value)}
-            onKeyDown={(e) => handleKeyPress(e)}
-          />
-          <Button
-            loading={isLoading}
-            onClick={() => handleLogin()}
-            title="Login"
-          />
-        </div>
-        <ButtonText
-          title="Crie sua conta!"
-          isAtive={!isLoading}
-          onClick={() => navigate("/register")}
-        />
-      </Form>
-      <Background />
+        <LoginArea>
+          <h4>
+            Olá, <br /> Bem vindo(a)!
+          </h4>
+          <Form>
+            <Input
+              placeholder="Seu email"
+              type="email"
+              white
+              icon={FiMail}
+              title="Email"
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => handleKeyPress(e)}
+            />
+            <Input
+              placeholder="Sua senha"
+              type="password"
+              white
+              icon={FiLock}
+              title="Senha"
+              onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => handleKeyPress(e)}
+            />
+            <Button
+              loading={isLoading}
+              onClick={() => handleLogin()}
+              title="Login"
+            />
+          </Form>
+        </LoginArea>
+        <p>
+          Não possui uma conta?{" "}
+          <ButtonText
+            title="Crie agora!"
+            isAtive={!isLoading}
+            white
+            onClick={() => navigate("/register")}
+          />{" "}
+        </p>
+      </Content>
       {notification}
     </Container>
   );

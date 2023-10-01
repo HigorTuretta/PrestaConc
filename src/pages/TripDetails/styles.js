@@ -3,48 +3,57 @@ import styled from "styled-components";
 export const Container = styled.div`
   height: 100vh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`;
 
-  > main {
-    grid-area: content;
-    margin: 0 auto;
-    max-width: 720px;
-    padding: 0 2rem;
+export const Content = styled.section`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  grid-area: content;
+  max-width: 720px;
+  overflow-y: hidden;
+`;
 
-    .city-area {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .city-area button {
-      padding: 0.5rem;
-      background-color: transparent;
-      border: solid 1px ${({ theme }) => theme.COLORS.RED};
-      color: ${({ theme }) => theme.COLORS.RED};
-      border-radius: 5px;
-      text-align: center;
-    }
+export const DateArea = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+`;
 
-    @media screen and (max-width: 530px) {
-      .dateCard {
-        flex-wrap: wrap;
-      }
-    }
+export const ValueArea = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const InvoiceInputArea = styled.div`
+  display: flex;
+  gap: 5px;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+
+  > .description {
+    flex: 0.6;
+  }
+
+  > .notDescription {
+    flex: 0.2;
   }
 `;
 
-export const CardArea = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1rem 0;
-  gap: 0.5rem;
-`;
-
 export const InvoiceArea = styled.div`
+  height: 100%;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1rem 0;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  flex-direction: column;
+  overflow-y: auto;
 `;

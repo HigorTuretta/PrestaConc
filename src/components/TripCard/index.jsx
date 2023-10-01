@@ -20,5 +20,6 @@ export function TripCard({ title, dataLeave, dataReturn, url, ...rest }) {
         </TripData>
       </Description>
     </Container>
+    
   );
 }

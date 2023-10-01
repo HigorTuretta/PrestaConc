@@ -6,12 +6,12 @@ export const Container = styled.div`
   flex-direction: column;
 
   > label {
-    color: ${({ $colortheme, theme }) =>
-      !$colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
-    font-family: Roboto Slab;
+    color: ${({ theme, $white }) =>
+      $white ? theme.COLORS.WHITE : theme.COLORS.BLACK};
+    font-family: "Montserrat", sans-serif;
     font-size: 1rem;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: normal;
   }
 
@@ -21,8 +21,8 @@ export const Container = styled.div`
     align-items: center;
     border-radius: 0 10px 10px 10px;
     border: 1px solid
-      ${({ $colortheme, theme }) =>
-        !$colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
+      ${({ theme, $white }) => ($white ? "none" : theme.COLORS.BLACK)};
+    background-color: ${({ theme }) => theme.COLORS.WHITE};
 
     input {
       width: 100%;
@@ -31,15 +31,13 @@ export const Container = styled.div`
       border: none;
       outline: none;
       padding: 16px;
-      background: ${({ $colortheme, theme }) =>
-        $colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
-      color: ${({ $colortheme, theme }) =>
-        !$colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
+      font-family: "Montserrat", sans-serif;
+      background: ${({ theme }) => theme.COLORS.WHITE};
+      color: ${({ theme }) => theme.COLORS.BLACK};
     }
 
     > svg {
-      color: ${({ $colortheme, theme }) =>
-        !$colortheme ? theme.COLORS.WHITE : theme.COLORS.BACKGROUND_900};
+      color: ${({ theme }) => theme.COLORS.BLACK};
       margin-left: 12px;
     }
   }

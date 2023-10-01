@@ -1,4 +1,4 @@
-import { Container, Form } from "./styles";
+import { Container, Form, Content } from "./styles";
 import { Input } from "../../components/Input";
 import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
@@ -90,25 +90,24 @@ export function CadTrip() {
   return (
     <Container>
       <Header />
-      <Title title="Cadastar Viagem" returnButton />
-      <main>
+      <Content>
+        <Title title="Cadastar Viagem" returnButton />
+
         <Form>
-          <div className="formSectionRow">
-            <Input
-              type="text"
-              title="UF"
-              onChange={(e) => setUf(e.target.value)}
-            />
-            <Input
-              type="text"
-              title="Cidade"
-              onChange={(e) => setCity(e.target.value)}
-              onKeyDown={(e) => handleKeyPress(e)}
-            />
-          </div>
+          <Input
+            type="text"
+            title="UF"
+            onChange={(e) => setUf(e.target.value)}
+          />
+          <Input
+            type="text"
+            title="Cidade"
+            onChange={(e) => setCity(e.target.value)}
+            onKeyDown={(e) => handleKeyPress(e)}
+          />
         </Form>
         <Button title="Confirmar" loading={isLoading} onClick={handleCadTrip} />
-      </main>
+      </Content>
       {notification}
     </Container>
   );

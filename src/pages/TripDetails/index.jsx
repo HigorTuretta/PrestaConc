@@ -1,26 +1,36 @@
 import { useEffect, useState } from "react";
-import { Container, CardArea, InvoiceArea } from "./styles";
+import {
+  Container,
+  DateArea,
+  ValueArea,
+  InvoiceInputArea,
+  InvoiceArea,
+  Content,
+} from "./styles";
 import { Header } from "../../components/Header";
 import { ValueCard } from "../../components/ValueCard";
-import { DateTimeCard } from "../../components/DateTimeCard";
 import { Invoice } from "../../components/Invoice";
+import { Button } from "../../components/Button";
+import { Input } from "../../components/Input";
 import { Title } from "../../components/Title";
 import { SubTitle } from "../../components/SubTitle";
 import { Modal } from "../../components/Modal";
 import { Loader } from "../../components/Loader";
-import { formatDate, localeDate } from "../../utils/formatDate";
+import { localeDate } from "../../utils/formatDate";
 import { compareDate } from "../../utils/dateDiff";
 import { api } from "../../services/api";
 import { useParams, useNavigate } from "react-router-dom";
-import mapIcon from "../../assets/Map.png";
-import walletIcon from "../../assets/Wallet.png";
-import { FaTrashCan, FaTriangleExclamation } from "react-icons/fa6";
+import mapIcon from "../../assets/mapIcon.png";
+import walletIcon from "../../assets/walletIcon.png";
+import { FaPlus, FaExclamationTriangle } from "react-icons/fa";
 import { Notification } from "../../components/Notification";
 
 export function TripDetails() {
   const params = useParams();
   const [loading, setLoading] = useState(true);
   const [invoices, setInvoices] = useState([]);
+  const [invDescription, setInvDescription] = useState();
+  const [invValue, setInvValue] = useState();
   const [dateLeft, setDateLeft] = useState();
   const [dateReturn, setDateReturn] = useState();
   const [totalValue, setTotalValue] = useState(0);
@@ -57,16 +67,20 @@ export function TripDetails() {
     setNotification(notification);
   };
 
-  const handleInputChange = (invDescription, invValue) => {
+  const handleAddInvoice = () => {
+    if (invValue === "" || invValue === 0) {
+      showNotification("Informe ao menos o valor da nota fiscal!", "error");
+      return;
+    }
     api
       .post(`/invoices/${params.id}`, {
-        description: invDescription,
+        description: invDescription ? invDescription : "Alimentação",
         value: invValue,
         created_at: localeDate(new Date()),
       })
       .then((res) => {
         const newInvoice = {
-          description: invDescription,
+          description: invDescription ? invDescription : "Alimentação",
           value: invValue,
           created_at: localeDate(new Date()),
           id: res.data[0],
@@ -74,6 +88,15 @@ export function TripDetails() {
         setInvoices([...invoices, newInvoice]);
         showNotification("Nota Adicionada", "success");
       });
+
+    setInvValue("");
+    setInvDescription("");
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleAddInvoice();
+    }
   };
 
   const handleDeleteInvoice = (invoiceId) => {
@@ -138,8 +161,8 @@ export function TripDetails() {
         const res = await api.get(`/details/${params.id}`);
         setTripData(res.data.tripData[0]);
         setInvoices(res.data.tripNotes);
-        setDateLeft(new Date(res.data.tripData[0].dataLeave));
-        setDateReturn(new Date(res.data.tripData[0].dataReturn));
+        setDateLeft(localeDate(new Date(res.data.tripData[0].dataLeave)));
+        setDateReturn(localeDate(new Date(res.data.tripData[0].dataReturn)));
         setAmountSpend(res.data.tripData[0].totalSpend);
         setLoading(false);
       } catch (error) {
@@ -154,24 +177,34 @@ export function TripDetails() {
   return (
     <Container>
       <Header />
-      <Title title="Detalhes da Viagem" returnButton goTo="/" />
       {loading ? (
         <Loader />
       ) : (
-        <main>
-          <div className="city-area">
-            <SubTitle
-              title={`${tripData?.city}/${tripData?.uf?.toUpperCase()}`}
-              iconSrc={mapIcon}
+        <Content>
+          <Title title="Detalhes da Viagem" returnButton goTo="/" />
+          <SubTitle
+            title={`${tripData?.city}/${tripData?.uf?.toUpperCase()}`}
+            iconSrc={mapIcon}
+            deleteButton={true}
+            onDeleteButtonClick={handleShowModal} // Passa a função handleShowModal
+          />
+          <DateArea>
+            <Input
+              title="Data/Hora Saída"
+              type="datetime-local"
+              value={dateLeft}
+              onChange={(e) => handleDateLeftChange(e.target.value)}
             />
-            <button onClick={() => handleShowModal()}>
-              <FaTrashCan />
-            </button>
-          </div>
-
-          <CardArea>
+            <Input
+              title="Data/Hora Retorno"
+              type="datetime-local"
+              value={dateReturn}
+              onChange={(e) => handleDateReturnChange(e.target.value)}
+            />
+          </DateArea>
+          <ValueArea>
             <ValueCard
-              title="Valor Total de Diárias"
+              title="Valor Total"
               value={totalValue.toLocaleString("pt-br", {
                 style: "currency",
                 currency: "BRL",
@@ -186,45 +219,48 @@ export function TripDetails() {
               })}
               IsRed={true}
             />
-          </CardArea>
-          <CardArea className="dateCard">
-            <DateTimeCard
-              onDateChange={handleDateLeftChange}
-              dateValue={dateLeft}
-              title="Data/Hora Saída"
-            />
-            <DateTimeCard
-              onDateChange={handleDateReturnChange}
-              dateValue={dateReturn}
-              title="Data/Hora Retorno"
-            />
-          </CardArea>
+          </ValueArea>
           <SubTitle title={"Suas Notas"} iconSrc={walletIcon} />
-          <InvoiceArea>
-            <Invoice
-              isNew
-              dateTime="Adicione uma nota fiscal"
-              onInputChange={handleInputChange}
+          <InvoiceInputArea>
+            <Input
+              className="description"
+              onChange={(e) => setInvDescription(e.target.value)}
+              value={invDescription}
+              type="text"
+              title="Descrição"
             />
-
+            <Input
+              className="notDescription"
+              value={invValue}
+              onChange={(e) => setInvValue(e.target.value)}
+              onKeyDown={(e) => handleKeyPress(e)}
+              type="number"
+              step="0.01"
+              title="Valor"
+            />
+            <Button
+              className="notDescription"
+              onClick={() => handleAddInvoice()}
+              icon={FaPlus}
+            />
+          </InvoiceInputArea>
+          <InvoiceArea>
             {invoices &&
               invoices.map((invoice) => (
                 <Invoice
                   key={invoice.id}
-                  dateTime={formatDate(new Date(invoice.created_at))}
                   invDescription={invoice.description}
                   invValue={invoice.value}
                   onDelete={() => handleDeleteInvoice(invoice.id)}
-                  readOnly
                   entranceAnimation
                 />
               ))}
           </InvoiceArea>
-        </main>
+        </Content>
       )}
       {showModal && (
         <Modal
-          icon={FaTriangleExclamation}
+          icon={FaExclamationTriangle}
           question="Deseja realmente deletar essa viagem? Você perderá todos os dados de notas cadastradas para ela."
           buttonTrue="Sim, deletar"
           buttonFalse="Cancelar"

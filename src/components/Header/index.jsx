@@ -1,6 +1,5 @@
-import { Container, Profile, Logout, Logo } from "./styles";
-import { RiShutDownLine } from "react-icons/ri";
-import avatarUrl from "../../assets/avatar_placeholder.svg";
+import { Container, Logout, Logo, LinkArea, Profile} from "./styles";
+import { FaDoorOpen, FaUser } from "react-icons/fa";
 import { useAuth } from "../../hooks/auth";
 import { useNavigate } from "react-router-dom";
 export function Header() {
@@ -14,19 +13,20 @@ export function Header() {
 
   return (
     <Container>
-      <Profile to="">
-        <img src={avatarUrl} alt="Foto do usário" />
-        <div>
-          <span>Olá,</span>
-          <strong>{user.name}</strong>
-        </div>
+      <Logo>
+        <a>Calky</a>
+      </Logo>
+      <LinkArea>
+      <Profile>
+        <FaUser/>
+        <span>Perfil</span>
       </Profile>
-        <Logo>
-          <h1>CALKY</h1>
-        </Logo>
       <Logout onClick={handleSignOut}>
-        <RiShutDownLine />
+        <FaDoorOpen />
+        <span>Sair</span>
       </Logout>
+      </LinkArea>
+     
     </Container>
   );
 }

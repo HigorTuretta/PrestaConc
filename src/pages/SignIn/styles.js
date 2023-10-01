@@ -1,56 +1,60 @@
 import styled from "styled-components";
-import backgroundImg from "../../assets/authBackground.jpeg";
 
 export const Container = styled.div`
   width: 100%;
   height: 100vh;
+  background: ${({ theme }) => theme.COLORS.BLUE};
+  background-position: center center;
+  background-size: cover;
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Content = styled.section`
+  width: 100%;
+  height: 100vh;
+  max-width: 720px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  > p {
+    color: ${({ theme }) => theme.COLORS.WHITE};
+    text-align: center;
+  }
 `;
 
 export const Logo = styled.div`
   color: ${({ theme }) => theme.COLORS.WHITE};
-  height: 20vh;
+  height: 20%;
+  text-align: center;
   > h1 {
-    font-family: "Play", sans-serif;
-    font-size: 4rem;
-    letter-spacing: 5px;
-    text-shadow: ${({theme})=> theme.COLORS.BLUE_100}  3px 3px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    font-size: 6rem;
+    text-shadow: -3px 3px rgba(245, 243, 245, 0.3);
+  }
+  > p {
+    font-size: 12px;
+    margin: -1.2rem 3.5rem 0 0;
+  }
+`;
+
+export const LoginArea = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 50%;
+
+  > h4 {
+    font-size: 24px;
+    color: ${({ theme }) => theme.COLORS.WHITE};
   }
 `;
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  background: ${({ theme }) => theme.COLORS.BACKGROUND_900};
-  width: 50%;
-  padding: 0 5rem;
-  height: 100vh;
-
-  > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  @media (max-width: 1000px) {
-    width: 100%;
-    padding: 0 2rem;
-  }
-`;
-
-export const Background = styled.div`
-  width: 100%;
-  height: 100vh;
-  background: url(${backgroundImg}) no-repeat center center;
-  background-size: cover;
-  filter: brightness(0.6);
-
-  @media (max-width: 1000px) {
-    display: none;
-  }
+  gap: 5px;
 `;

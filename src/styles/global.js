@@ -9,11 +9,12 @@ export default createGlobalStyle`
 
     body{
         -webkit-font-smoothing: antialiased;
-        background-color: ${({theme}) => theme.COLORS.BACKGROUND_900}
+        background-color: ${({theme}) => theme.COLORS.WHITE}
     }
 
-    body , input, button , textarea{
-        font-family: 'Roboto Slab', serif;
+    body , input, button , textarea, p, span{
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
         font-size: 16px;
         outline: none;
     }
@@ -26,8 +27,10 @@ export default createGlobalStyle`
         cursor: pointer;
         transition: filter 0.2s
     }
-
-    button:hover , a:hover {
+    button:hover {
+        filter: invert(0.1);
+    }
+     a:hover {
        filter: brightness(0.9)
     }
 

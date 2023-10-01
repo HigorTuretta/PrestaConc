@@ -1,4 +1,4 @@
-import { Container } from "./styles";
+import { Container, Content, TripsArea } from "./styles";
 import { TripCard } from "../../components/TripCard";
 import { Header } from "../../components/Header";
 import { Title } from "../../components/Title";
@@ -57,27 +57,29 @@ export function Home() {
   return (
     <Container>
       <Header />
-      <Title title="Suas Viagens" />
       {loading ? (
         <Loader />
       ) : (
-        <main>
-          <div className="button-area">
-            <Button
-              title={"Adicionar uma Viagem"}
-              onClick={() => handleCreateTrip()}
-            />
-          </div>
-          {trips.map((trip) => (
-            <TripCard
-              title={`${trip.city} / ${trip.uf.toUpperCase()}`}
-              dataLeave={formatDate(new Date(trip.dataLeave))}
-              dataReturn={formatDate(new Date(trip.dataReturn))}
-              key={String(trip.trip_id)}
-              onClick={() => handleTripDetails(trip.trip_id)}
-            />
-          ))}
-        </main>
+        <Content>
+          <Button
+            title={"Adicionar uma Viagem"}
+            onClick={() => handleCreateTrip()}
+          />
+
+          <Title title="Suas Viagens" />
+
+          <TripsArea>
+            {trips.map((trip) => (
+              <TripCard
+                title={`${trip.city} / ${trip.uf.toUpperCase()}`}
+                dataLeave={formatDate(new Date(trip.dataLeave))}
+                dataReturn={formatDate(new Date(trip.dataReturn))}
+                key={String(trip.trip_id)}
+                onClick={() => handleTripDetails(trip.trip_id)}
+              />
+            ))}
+          </TripsArea>
+        </Content>
       )}
       {notification}
     </Container>

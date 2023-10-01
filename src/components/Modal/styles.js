@@ -24,7 +24,7 @@ export const ModalArea = styled.div`
   min-height: 10rem;
   border-radius: 15px;
   color: ${({ theme }) => theme.COLORS.WHITE};
-  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_700};
+  background-color: ${({ theme }) => theme.COLORS.BLUE};
   font-family: Roboto Slab;
 `;
 
@@ -46,7 +46,7 @@ export const ButtonArea = styled.div`
   width: 100%;
   height: 3rem;
   border-radius: 0 0 15px 15px;
-  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
+  background-color: rgba(26, 75, 173);
 
   > button {
     all: unset;

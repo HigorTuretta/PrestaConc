@@ -1,58 +1,45 @@
 import styled from "styled-components";
 export const Container = styled.header`
   grid-area: header;
-  height: 105px;
+  height: 90px;
   width: 100%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
-
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
   display: flex;
   align-items: center;
-  padding-left: 2rem;
-`;
-
-export const Profile = styled.a`
-  display: flex;
-  align-items: center;
-  flex: 1;
-
-  > img {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    margin-right: 1rem;
-  }
-
-  > div {
-    display: flex;
-    flex-direction: column;
-    line-height: 24px;
-
-    span {
-      font-size: 14px;
-      color: ${({ theme }) => theme.COLORS.WHITE};
-    }
-
-    strong {
-      font-size: 18px;
-      color: ${({ theme }) => theme.COLORS.WHITE};
-    }
-  }
-  @media screen and (max-width: 870px) {
-    > div {
-      display: none;
-    }
-  }
+  justify-content: space-between;
+  padding: 1rem;
+  box-shadow: 0px 4px 4px 0px rgba(80, 136, 249, 0.26);
 `;
 
 export const Logo = styled.div`
-  font-family: "Play", sans-serif;
-  text-align: center;
-  color: ${({ theme }) => theme.COLORS.WHITE};
-  flex: 2;
-  margin-left: -2rem;
+  color: ${({ theme }) => theme.COLORS.BLUE};
+  > a {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 900;
+    font-size: 3rem;
+    text-shadow: -3px 3px rgba(245, 243, 245, 0.3);
+  }
 `;
 
+export const LinkArea = styled.div`
+display: flex;
+`;
+
+export const Profile = styled.button`
+  border: none;
+  background: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  > svg {
+    color: ${({ theme }) => theme.COLORS.BLACK};
+    font-size: 2rem;
+  }
+`;
 
 export const Logout = styled.button`
   border: none;
@@ -60,7 +47,7 @@ export const Logout = styled.button`
   flex: 1;
 
   > svg {
-    color: ${({ theme }) => theme.COLORS.WHITE};
-    font-size: 36px;
+    color: ${({ theme }) => theme.COLORS.BLACK};
+    font-size: 2rem;
   }
 `;
