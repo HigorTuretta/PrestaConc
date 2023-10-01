@@ -24,6 +24,9 @@ export const InvoiceDetails = styled.div`
     font-size: 22px;
     color: ${({theme}) => theme.COLORS.BLACK}
   }
+  >div svg:hover{
+    cursor: pointer;
+  }
   > span {
     font-weight: 700;
   }

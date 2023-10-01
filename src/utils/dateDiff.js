@@ -45,10 +45,5 @@ export function compareDate(date1, date2) {
       ? diarias * valorDiarias + valorDiarias / 2
       : diarias * valorDiarias;
 
-  totalValue = totalValue.toLocaleString("pt-br", {
-    style: "currency",
-    currency: "BRL",
-  });
-
   return totalValue;
 }

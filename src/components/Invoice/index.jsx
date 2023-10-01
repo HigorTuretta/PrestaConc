@@ -1,6 +1,6 @@
 import { Container, Line, InvoiceDetails } from "./styles";
 import { FiTrash2 } from "react-icons/fi";
-
+import { formatCurrency } from "../../utils/formatDate";
 export function Invoice({
   dateTime,
   isNew = false,
@@ -23,11 +23,9 @@ export function Invoice({
           <FiTrash2 onClick={() => handleDeleteClick()} />
           <span>{invDescription}</span>
         </div>
-        <span>{invValue.toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-                minimumFractionDigits: 2
-              })}</span>
+        <span>
+          {formatCurrency(invValue)}
+        </span>
       </InvoiceDetails>
       <Line />
     </Container>

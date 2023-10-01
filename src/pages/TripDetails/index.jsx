@@ -16,13 +16,18 @@ import { Title } from "../../components/Title";
 import { SubTitle } from "../../components/SubTitle";
 import { Modal } from "../../components/Modal";
 import { Loader } from "../../components/Loader";
-import { localeDate } from "../../utils/formatDate";
+import { localeDate, formatCurrency } from "../../utils/formatDate";
 import { compareDate } from "../../utils/dateDiff";
 import { api } from "../../services/api";
 import { useParams, useNavigate } from "react-router-dom";
 import mapIcon from "../../assets/mapIcon.png";
 import walletIcon from "../../assets/walletIcon.png";
-import { FaPlus, FaExclamationTriangle,FaPlaneArrival,FaPlaneDeparture } from "react-icons/fa";
+import {
+  FaPlus,
+  FaExclamationTriangle,
+  FaPlaneArrival,
+  FaPlaneDeparture,
+} from "react-icons/fa";
 import { Notification } from "../../components/Notification";
 
 export function TripDetails() {
@@ -207,18 +212,12 @@ export function TripDetails() {
           <ValueArea>
             <ValueCard
               title="Valor Total"
-              value={totalValue.toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })}
+              value={formatCurrency(totalValue)}
               IsRed={false}
             />
             <ValueCard
               title="Valor Gasto"
-              value={amountSpend.toLocaleString("pt-br", {
-                style: "currency",
-                currency: "BRL",
-              })}
+              value={formatCurrency(amountSpend)}
               IsRed={true}
             />
           </ValueArea>
