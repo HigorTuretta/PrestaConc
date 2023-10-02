@@ -2,7 +2,7 @@ import { createContext } from "react";
 import { useContext, useState, useEffect } from "react";
 import { api } from "../services/api";
 import { Notification } from "../components/Notification";
-
+import { useNavigate } from "react-router-dom";
 export const AuthContext = createContext({});
 
 function AuthProvider({ children }) {
@@ -43,10 +43,12 @@ function AuthProvider({ children }) {
   }
   
   function signOut() {
+    const navigate = useNavigate()
     localStorage.removeItem("@prestaConc:user");
     localStorage.removeItem("@prestaConc:token");
     api.defaults.headers.authorization = "";
     setData({});
+    navigate('/')
   }
 
   useEffect(() => {
