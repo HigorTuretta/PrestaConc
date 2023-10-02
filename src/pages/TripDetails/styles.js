@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 `;
 
 export const Content = styled.section`
@@ -18,7 +17,6 @@ export const Content = styled.section`
   padding: 1rem;
   grid-area: content;
   max-width: 720px;
-  overflow-y: hidden;
 `;
 
 export const DateArea = styled.div`
@@ -55,5 +53,4 @@ export const InvoiceArea = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
 `;
