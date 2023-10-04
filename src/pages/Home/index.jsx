@@ -49,6 +49,7 @@ export function Home() {
       } catch (error) {
         if ( error.response.data.message === "JWT Token invalido."){
           signOut();
+          navigate('/')
         }
         showNotification("Erro ao buscar viagens:", "error");
         setLoading(false); // Marca o carregamento como concluído mesmo em caso de erro
