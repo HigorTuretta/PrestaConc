@@ -131,7 +131,7 @@ export function SignUp() {
             <Button
               loading={isLoading}
               onClick={() => handleRegister()}
-              title="Login"
+              title="Cadastrar-se"
             />
           </Form>
         </LoginArea>
