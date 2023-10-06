@@ -1,18 +1,17 @@
 import { Input } from "../../components/Input";
 import { Container, Content, Form, Logo, LoginArea } from "./styles";
-import { FiMail, FiLock } from "react-icons/fi";
+import { FiMail } from "react-icons/fi";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAuth } from "../../hooks/auth";
 import { Notification } from "../../components/Notification";
-export function SignIn() {
+import { api } from "../../services/api";
+
+export function PasswordRecToken() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { signIn } = useAuth();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [notification, setNotification] = useState(null);
 
   const showNotification = (message, type) => {
@@ -30,19 +29,18 @@ export function SignIn() {
     setNotification(notification);
   };
 
-  function handleLogin() {
+  function handlePasswordReset() {
     setIsLoading(true);
 
-    if (!email || !password) {
-      showNotification("Informe seu email e/ou senha!", "error");
+    if (!email) {
+      showNotification("Informe seu email!", "error");
       setIsLoading(false);
       return;
     }
 
-    signIn({ email, password })
-      .then(() => {
-        setIsLoading(false);
-      })
+    api
+      .post("/passwordRecovery/token", {email})
+      .then(navigate(`/password-token/${email}`))
       .catch((err) => {
         showNotification(`Erro ao realizar login: ${err.message}`, "error");
         setIsLoading(false);
@@ -50,7 +48,7 @@ export function SignIn() {
   }
 
   function handleKeyPress(e) {
-    e.key === "Enter" && handleLogin();
+    e.key === "Enter" && handlePasswordReset();
   }
 
   useEffect(() => {
@@ -65,50 +63,30 @@ export function SignIn() {
           <p>Calculador de prestação de contas.</p>
         </Logo>
         <LoginArea>
-          <h4>
-            Olá, <br /> Bem vindo(a)!
-          </h4>
+          <h4>Recupere sua senha 🙌</h4>
           <Form>
             <Input
-              placeholder="Seu email"
+              placeholder="Email cadastrado na conta"
               type="email"
               white
               icon={FiMail}
-              title="Email"
+              title="Informe o email"
               onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => handleKeyPress(e)}
-            />
-            <Input
-              placeholder="Sua senha"
-              type="password"
-              white
-              icon={FiLock}
-              title="Senha"
-              onChange={(e) => setPassword(e.target.value)}
               onKeyDown={(e) => handleKeyPress(e)}
             />
             <Button
               loading={isLoading}
-              onClick={() => handleLogin()}
-              title="Login"
+              onClick={() => handlePasswordReset()}
+              title="Recuperar Senha"
             />
           </Form>
         </LoginArea>
-        <p>
-          Não possui uma conta?{" "}
-          <ButtonText
-            title="Crie agora!"
-            isAtive={!isLoading}
-            white
-            onClick={() => navigate("/register")}
-          />{" "}
-        </p>
         <ButtonText
-            title="Esqueci minha senha"
-            isAtive={!isLoading}
-            white
-            onClick={() => navigate("/password-reset")}
-          />
+          title="👈 Volte ao Login"
+          isAtive={!isLoading}
+          white
+          onClick={() => navigate("/")}
+        />
       </Content>
       {notification}
     </Container>

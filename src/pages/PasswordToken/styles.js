@@ -18,12 +18,6 @@ export const Content = styled.section`
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-
-  > p {
-    color: ${({ theme }) => theme.COLORS.WHITE};
-    text-align: center;
-    margin-bottom: 1rem;
-  }
 `;
 
 export const Logo = styled.div`
@@ -42,20 +36,26 @@ export const Logo = styled.div`
   }
 `;
 
-export const LoginArea = styled.div`
+export const FormArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 50%;
+  height: 40%;
 
-  > h4 {
-    font-size: 24px;
+  > p {
+    font-size: 16px;
     color: ${({ theme }) => theme.COLORS.WHITE};
+    text-align: justify;
   }
 `;
 
-export const Form = styled.form`
+
+export const Form = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
 `;
+
+export const PasswordChangeForm = styled.div`
+
+`

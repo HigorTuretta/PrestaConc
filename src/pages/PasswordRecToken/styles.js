@@ -18,12 +18,6 @@ export const Content = styled.section`
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
-
-  > p {
-    color: ${({ theme }) => theme.COLORS.WHITE};
-    text-align: center;
-    margin-bottom: 1rem;
-  }
 `;
 
 export const Logo = styled.div`
@@ -46,11 +40,12 @@ export const LoginArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  height: 50%;
+  height: 30%;
 
   > h4 {
     font-size: 24px;
     color: ${({ theme }) => theme.COLORS.WHITE};
+    text-align: center;
   }
 `;
 
