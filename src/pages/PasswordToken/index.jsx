@@ -82,8 +82,6 @@ export function PasswordToken() {
         newPassword: password,
       })
       .then((res) => {
-        console.log(res);
-        console.log("toaqui");
         showNotification(res.data, "success");
         setIsLoading(false);
         navigate("/");
