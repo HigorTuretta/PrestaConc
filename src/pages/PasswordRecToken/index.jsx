@@ -39,7 +39,7 @@ export function PasswordRecToken() {
     }
 
     api
-      .post("/passwordRecovery/token", {email})
+      .post("/passwordRecovery/token", {email, created_at: new Date()})
       .then(navigate(`/password-token/${email}`))
       .catch((err) => {
         showNotification(`Erro ao realizar login: ${err.message}`, "error");
