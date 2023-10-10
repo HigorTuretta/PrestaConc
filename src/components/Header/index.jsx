@@ -17,10 +17,10 @@ export function Header() {
         <a>Calky</a>
       </Logo>
       <LinkArea>
-      <Profile>
+      {/* <Profile>
         <FaUser/>
         <span>Perfil</span>
-      </Profile>
+      </Profile> */}
       <Logout onClick={handleSignOut}>
         <FaDoorOpen />
         <span>Sair</span>
