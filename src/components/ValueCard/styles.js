@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   font-family: "Montserrat", sans-serif;
-  text-align: ${({ $isred }) => ($isred ? "right" : "left")};
+  text-align: ${({ $isred, $isbalance }) =>
+    $isred ? ($isbalance ? "left" : "right") : "left"};
   margin: 1rem 0;
   > h1 {
     color: ${({ theme, $isred }) =>
@@ -14,6 +15,6 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.BLACK};
     font-size: 0.75rem;
     margin-bottom: 0.5rem;
-    font-weight: 700;
+    font-weight: 700;F
   }
 `;

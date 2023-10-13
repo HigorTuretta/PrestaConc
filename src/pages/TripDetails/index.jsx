@@ -41,6 +41,8 @@ export function TripDetails() {
   const [dateReturn, setDateReturn] = useState();
   const [totalValue, setTotalValue] = useState(0);
   const [amountSpend, setAmountSpend] = useState(0);
+  const [colorBalance, setColorBalance] = useState(false)
+  const [balance, setBalance] = useState(0)
   const [tripData, setTripData] = useState();
   const [showModal, setShowModal] = useState(false);
   const [userResponse, setUserResponse] = useState(null);
@@ -139,6 +141,18 @@ export function TripDetails() {
     }
   }, [dateLeft, dateReturn]);
 
+  useEffect(() =>{
+    setBalance(totalValue - amountSpend);
+  },[totalValue, amountSpend]);
+
+  useEffect(() =>{
+    if (balance < 0) {
+      setColorBalance(true);
+    }else{
+      setColorBalance(false);
+    }
+  },[balance]);
+
   useEffect(() => {
     api
       .put(`details/${params.id}`, {
@@ -169,7 +183,7 @@ export function TripDetails() {
         setInvoices(res.data.tripNotes);
         setDateLeft(localeDate(new Date(res.data.tripData[0].dataLeave)));
         setDateReturn(localeDate(new Date(res.data.tripData[0].dataReturn)));
-        setAmountSpend(res.data.tripData[0].totalSpend);
+        setAmountSpend(res.data.tripData[0].totalSpend);       
         setLoading(false);
       } catch (error) {
         showNotification("Erro ao buscar dados da viagem:", "error");
@@ -216,6 +230,12 @@ export function TripDetails() {
               title="Valor Total"
               value={formatCurrency(totalValue)}
               IsRed={false}
+            />
+             <ValueCard
+              title="Saldo"
+              value={formatCurrency(balance)}
+              IsRed={colorBalance}
+              isBalance
             />
             <ValueCard
               title="Valor Gasto"
