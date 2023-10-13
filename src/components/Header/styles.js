@@ -11,9 +11,10 @@ export const Container = styled.header`
   box-shadow: 0px 4px 4px 0px rgba(80, 136, 249, 0.26);
 `;
 
-export const Logo = styled.div`
-  color: ${({ theme }) => theme.COLORS.BLUE};
+export const Logo = styled.div`  
   > a {
+    color: ${({ theme }) => theme.COLORS.BLUE};
+    text-decoration: none;
     font-family: "Montserrat", sans-serif;
     font-weight: 900;
     font-size: 3rem;

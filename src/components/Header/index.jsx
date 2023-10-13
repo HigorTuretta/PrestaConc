@@ -14,7 +14,7 @@ export function Header() {
   return (
     <Container>
       <Logo>
-        <a>Calky</a>
+        <a href="/">Calky</a>
       </Logo>
       <LinkArea>
       {/* <Profile>
