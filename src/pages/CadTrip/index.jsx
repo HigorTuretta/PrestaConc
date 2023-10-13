@@ -39,6 +39,8 @@ export function CadTrip() {
       return;
     }
 
+    setIsLoading(true)
+
     api
       .post("/trips/", { uf, city })
       .then((res) => {
@@ -57,14 +59,19 @@ export function CadTrip() {
             totalSpend: 0,
           })
           .then(() => {
-            navigate(`/details/${trip_id}`);
+            setTimeout(() => {
+              navigate(`/details/${trip_id}`);
+            }, 1000);
+          
           })
           .catch((err) => {
             showNotification(
               "Erro ao redirecionar ou adicionar dados da viagem!",
               "error"
             );
-            navigate(-1);
+            setTimeout(() => {
+              navigate(-1);
+            }, 1000);           
           });
       })
       .catch((err) => {

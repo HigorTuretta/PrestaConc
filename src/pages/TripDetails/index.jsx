@@ -125,6 +125,11 @@ export function TripDetails() {
   };
 
   const handleDateReturnChange = (date) => {
+    if (localeDate(new Date(date)) < dateLeft) {
+      showNotification("A data de retorno não pode ser anterior a data de Saída!", "error");
+      return;
+    }
+
     setDateReturn(localeDate(new Date(date)));
   };
 

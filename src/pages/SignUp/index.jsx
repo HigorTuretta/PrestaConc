@@ -58,7 +58,10 @@ export function SignUp() {
       .post("/users/register", { name, email, password })
       .then(() => {
         showNotification("Usuário criado com sucesso!", "success");
-        navigate("/");
+        setTimeout(() => {         
+          navigate("/");
+        }, 1000);
+       
       })
       .catch((err) => {
         setIsLoading(false);
