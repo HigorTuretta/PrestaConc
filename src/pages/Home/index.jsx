@@ -5,11 +5,13 @@ import { Title } from "../../components/Title";
 import { Button } from "../../components/Button";
 import { Loader } from "../../components/Loader";
 import { Notification } from "../../components/Notification";
+import { Footer } from "../../components/Footer";
 import { formatDate } from "../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth"; 
+import { Fragment } from "react";
 
 export function Home() {
   const navigate = useNavigate();
@@ -64,7 +66,7 @@ export function Home() {
       <Header />
       {loading ? (
         <Loader />
-      ) : (
+      ) : (<Fragment>
         <Content>
           <Button
             title={"Adicionar uma Viagem"}
@@ -85,6 +87,8 @@ export function Home() {
             ))}
           </TripsArea>
         </Content>
+        <Footer color="black" />
+        </Fragment>
       )}
       {notification}
     </Container>

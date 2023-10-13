@@ -3,7 +3,6 @@ export const Container = styled.header`
   grid-area: header;
   height: 90px;
   width: 100%;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: ${({ theme }) => theme.COLORS.WHITE};
   display: flex;
   align-items: center;

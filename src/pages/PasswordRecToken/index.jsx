@@ -6,6 +6,7 @@ import { ButtonText } from "../../components/ButtonText";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Notification } from "../../components/Notification";
+import { Footer } from "../../components/Footer";
 import { api } from "../../services/api";
 
 export function PasswordRecToken() {
@@ -88,6 +89,7 @@ export function PasswordRecToken() {
           onClick={() => navigate("/")}
         />
       </Content>
+      <Footer/>
       {notification}
     </Container>
   );

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
 import { Notification } from "../../components/Notification";
+import { Footer } from "../../components/Footer";
 export function SignIn() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
@@ -104,12 +105,13 @@ export function SignIn() {
           />{" "}
         </p>
         <ButtonText
-            title="Esqueci minha senha"
-            isAtive={!isLoading}
-            white
-            onClick={() => navigate("/password-reset")}
-          />
+          title="Esqueci minha senha"
+          isAtive={!isLoading}
+          white
+          onClick={() => navigate("/password-reset")}
+        />
       </Content>
+      <Footer />
       {notification}
     </Container>
   );

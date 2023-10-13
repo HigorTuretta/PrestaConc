@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 import { api } from "../../services/api";
 import { isEmail } from "validator";
 import { Notification } from "../../components/Notification";
-
+import { Footer } from "../../components/Footer";
 export function SignUp() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
@@ -145,7 +145,7 @@ export function SignUp() {
           />{" "}
         </p>
       </Content>
-
+      <Footer/>
       {notification}
     </Container>
   );

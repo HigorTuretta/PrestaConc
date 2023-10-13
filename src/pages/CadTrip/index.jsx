@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useEffect, useState } from "react";
 import { Notification } from "../../components/Notification";
+import { Footer } from "../../components/Footer";
 import { formatDate, localeDate } from "../../utils/formatDate";
 
 export function CadTrip() {
@@ -108,6 +109,7 @@ export function CadTrip() {
         </Form>
         <Button title="Confirmar" loading={isLoading} onClick={handleCadTrip} />
       </Content>
+      <Footer color="black"/>
       {notification}
     </Container>
   );

@@ -13,6 +13,7 @@ import { ButtonText } from "../../components/ButtonText";
 import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Notification } from "../../components/Notification";
+import { Footer} from "../../components/Footer";
 import { api } from "../../services/api";
 
 export function PasswordToken() {
@@ -158,6 +159,7 @@ export function PasswordToken() {
           onClick={() => navigate("/")}
         />
       </Content>
+      <Footer/>
       {notification}
     </Container>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import {
   Container,
   DateArea,
@@ -16,6 +16,7 @@ import { Title } from "../../components/Title";
 import { SubTitle } from "../../components/SubTitle";
 import { Modal } from "../../components/Modal";
 import { Loader } from "../../components/Loader";
+import { Footer } from "../../components/Footer";
 import { localeDate, formatCurrency } from "../../utils/formatDate";
 import { compareDate } from "../../utils/dateDiff";
 import { api } from "../../services/api";
@@ -185,6 +186,7 @@ export function TripDetails() {
       {loading ? (
         <Loader />
       ) : (
+        <Fragment>
         <Content>
           <Title title="Detalhes da Viagem" returnButton goTo="/" />
           <SubTitle
@@ -258,6 +260,8 @@ export function TripDetails() {
               ))}
           </InvoiceArea>
         </Content>
+        <Footer color="black" />
+        </Fragment>
       )}
       {showModal && (
         <Modal

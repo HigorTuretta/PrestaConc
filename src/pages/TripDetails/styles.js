@@ -13,9 +13,9 @@ export const Container = styled.div`
 export const Content = styled.section`
   display: flex;
   flex-direction: column;
-  height: 100vh;
   width: 100%;
-  padding: 1rem;
+  flex: 1;
+  padding: 1rem 1rem 5rem 1rem;
   grid-area: content;
   max-width: 720px;
 `;
@@ -38,7 +38,7 @@ export const InvoiceInputArea = styled.div`
   display: flex;
   gap: 5px;
   width: 100%;
-  height: 100px;
+  height: 100%;
   margin-bottom: 10px;
 
   > .description {

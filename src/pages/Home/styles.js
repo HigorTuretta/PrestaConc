@@ -15,7 +15,7 @@ export const Content = styled.section`
   max-width: 720px;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1rem 1rem 3rem 1rem;
   flex: 1; /* Faz com que o Content ocupe o espaço disponível verticalmente */
   overflow: hidden; /* Impede que o Content role */
 

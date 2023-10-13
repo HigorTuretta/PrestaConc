@@ -4,8 +4,6 @@ export const Container = styled.div`
   width: 100%;
   height: 100vh;
   background: ${({ theme }) => theme.COLORS.BLUE};
-  background-position: center center;
-  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
