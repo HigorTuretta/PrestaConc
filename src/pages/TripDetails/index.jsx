@@ -6,6 +6,7 @@ import {
   InvoiceInputArea,
   InvoiceArea,
   Content,
+  SpendValueArea
 } from "./styles";
 import { Header } from "../../components/Header";
 import { ValueCard } from "../../components/ValueCard";
@@ -76,7 +77,7 @@ export function TripDetails() {
   };
 
   const handleAddInvoice = () => {
-    if (invValue === "" || invValue === 0) {
+    if (invValue === "" || invValue == 0) {
       showNotification("Informe ao menos o valor da nota fiscal!", "error");
       return;
     }
@@ -242,11 +243,6 @@ export function TripDetails() {
               IsRed={colorBalance}
               isBalance
             />
-            <ValueCard
-              title="Valor Gasto"
-              value={formatCurrency(amountSpend)}
-              IsRed={true}
-            />
           </ValueArea>
           <SubTitle title={"Suas Notas"} iconSrc={walletIcon} />
           <InvoiceInputArea>
@@ -284,6 +280,10 @@ export function TripDetails() {
                 />
               ))}
           </InvoiceArea>
+          <SpendValueArea>
+                <span>Total Gasto</span>
+                <span>{formatCurrency(amountSpend)}</span>
+          </SpendValueArea>
         </Content>
         <Footer color="black" />
         </Fragment>

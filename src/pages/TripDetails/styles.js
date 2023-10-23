@@ -55,3 +55,15 @@ export const InvoiceArea = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+export const SpendValueArea = styled.div`
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > span {
+    font-weight: 700;
+    padding: 0.5em 0;
+  }
+`;
