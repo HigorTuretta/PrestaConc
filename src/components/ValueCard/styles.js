@@ -2,12 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   font-family: "Montserrat", sans-serif;
-  text-align: ${({ $isred, $isbalance }) =>
-    $isred ? ($isbalance ? "left" : "right") : "left"};
+  text-align: ${({ $isbalance }) => ($isbalance ? "right" : "left")};
   margin: 1rem 0;
   > h1 {
-    color: ${({ theme, $isred }) =>
-      $isred ? theme.COLORS.RED : theme.COLORS.BLUE};
+    color: ${({ theme, $isred, $isbalance }) =>
+      $isred
+        ? theme.COLORS.RED
+        : $isbalance
+        ? theme.COLORS.GREEN
+        : theme.COLORS.BLUE};
     font-size: 1.5rem;
     font-weight: 700;
   }

@@ -6,7 +6,7 @@ export function Footer({color = "white"}) {
     <Container $color={color}>
       <div>
         <FaReact />
-        <p>Sistema ainda em testes.</p>
+        <p>Sistema em desenvolvimento.</p>
       </div>
       <div>
         <a href="https://www.linkedin.com/in/higor-turetta/" target="_blank" rel="noopener noreferrer">
