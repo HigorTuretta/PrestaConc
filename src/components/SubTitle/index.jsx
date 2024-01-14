@@ -3,7 +3,7 @@ import { FaTrashCan } from "react-icons/fa6";
 
 export function SubTitle({
   title,
-  iconSrc,
+  iconSrc = false,
   deleteButton = false,
   onDeleteButtonClick,
 }) {
@@ -18,8 +18,9 @@ export function SubTitle({
     <Container>
       <Content>
         <h2>
-          <img src={iconSrc} alt={title} /> {title}
+          {iconSrc && <img src={iconSrc} alt={title} />} {title}
         </h2>
+
         {deleteButton && (
           <button onClick={handleDeleteButtonClick}>
             <FaTrashCan />

@@ -41,6 +41,24 @@ export const Profile = styled.button`
   }
 `;
 
+export const Contact = styled.button`
+  border: none;
+  background: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items:center;
+  margin-right: 1rem;
+  > svg {
+    color: ${({ theme }) => theme.COLORS.BLACK};
+    font-size: 2rem;
+  }
+  >span{
+    font-size: 14px;
+  }
+`
+
 export const Logout = styled.button`
   border: none;
   background: none;
@@ -48,8 +66,13 @@ export const Logout = styled.button`
   display: flex;
   flex-direction: column;
   margin-right: 1rem;
+  justify-content:center;
+  align-items:center;
   > svg {
     color: ${({ theme }) => theme.COLORS.BLACK};
     font-size: 2rem;
+  }
+  >span{
+    font-size: 14px;
   }
 `;

@@ -32,13 +32,14 @@ export const Container = styled.div`
     font-family: "Montserrat", sans-serif;
     padding: 1rem;
     font-size: 14px;
+    max-width: 80%;
   }
   > div {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: darkgreen;
-    width: 5%;
+    width: 10%;
     height: 100%;
     border-radius: 5px;
     > svg {
