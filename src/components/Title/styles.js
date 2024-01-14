@@ -7,7 +7,7 @@ export const Container = styled.div`
 
   justify-content: space-between;
   align-items: center;
-  margin: 2rem 0;
+  margin: 1rem 0;
 
   > h1 {
     color: ${({ theme }) => theme.COLORS.BLACK};

@@ -55,7 +55,7 @@ export function CadTrip() {
             trip_id,
             dataLeave: initialDateLeft,
             dataReturn: initialDateReturn,
-            dailyTotal: 80,
+            dailyTotal: 100,
             totalSpend: 0,
           })
           .then(() => {

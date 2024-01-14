@@ -7,7 +7,7 @@ export function compareDate(date1, date2) {
   const hours = result.hours;
   const minutes = result.minutes;
   let totalValue = 0;
-  const valorDiarias = 80;
+  const valorDiarias = 100;
   let diarias = 0;
   let meiaDiaria = false;
 

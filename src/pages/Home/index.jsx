@@ -12,6 +12,7 @@ import { api } from "../../services/api";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth"; 
 import { Fragment } from "react";
+import { Alert } from "../../components/Alert";
 
 export function Home() {
   const navigate = useNavigate();
@@ -72,6 +73,8 @@ export function Home() {
             title={"Adicionar uma Viagem"}
             onClick={() => handleCreateTrip()}
           />
+
+          <Alert msg="O valor das diárias foi ajustado para R$100,00."/>
 
           <Title title="Suas Viagens" />
 
