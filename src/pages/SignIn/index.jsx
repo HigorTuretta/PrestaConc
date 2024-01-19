@@ -1,8 +1,9 @@
 import { Input } from "../../components/Input";
-import { Container, Content, Form, Logo, LoginArea } from "./styles";
+import { Container, Content, Form, Logo, LoginArea, ContentDescription } from "./styles";
 import { FiMail, FiLock } from "react-icons/fi";
 import { Button } from "../../components/Button";
 import { ButtonText } from "../../components/ButtonText";
+import { StepsCard } from "../../components/StepsCards";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../hooks/auth";
@@ -58,6 +59,21 @@ export function SignIn() {
     setIsLoading(false);
   }, []);
 
+  const steps = [
+       {
+        id: 1,
+        icon: 'plane',
+        title: "Passo 1 - Adicionar Viagem",
+        description: "Informe seu destino. Basta adicionar o Estado e a Cidade da sua próxima viagem e deixe o Calky cuidar do resto."
+    },
+    {
+        id: 3,
+        icon: 'money',
+        title: "Passo 2 - Controle de Despesas e Saldos",
+        description: "Controle total nas suas mãos. Insira as datas da sua viagem e acompanhe seu saldo disponível. Cadastre notas de alimentação e mantenha seu orçamento sob controle."
+    }
+];
+
   return (
     <Container>
       <Content>
@@ -111,6 +127,15 @@ export function SignIn() {
           onClick={() => navigate("/password-reset")}
         />
       </Content>
+      <ContentDescription>
+          <h2>Gerencie suas despesas de viagem com facilidade<br/>Bem-vindo ao Calky!</h2>
+          <p>
+            O Calky é o seu assistente de viagens corporativas. Facilitamos a gestão das suas diárias de alimentação, transformando a maneira como você controla seus gastos durante as viagens. 
+          </p>
+          <h2>Apenas 2 passos simples!</h2>
+          <StepsCard steps={steps} />
+          <p>Com o Calky, você tem o controle financeiro da sua viagem na palma da sua mão. Desfrute de um processo simplificado de registro de despesas, <b>um sistema de saldo intuitivo e uma visão geral clara de suas despesas de alimentação.</b></p>
+      </ContentDescription>
       <Footer />
       {notification}
     </Container>
