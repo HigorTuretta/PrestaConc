@@ -3,11 +3,13 @@ import backgroundImg from "../../assets/authBackground.jpeg";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
+  flex: 1;
   background: ${({ theme }) => theme.COLORS.BLUE};
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  overflow: hidden;
 `;
 
 export const Content = styled.section`

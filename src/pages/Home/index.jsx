@@ -90,7 +90,7 @@ export function Home() {
             ))}
           </TripsArea>
         </Content>
-        <Footer color="black" />
+        <Footer/>
         </Fragment>
       )}
       {notification}

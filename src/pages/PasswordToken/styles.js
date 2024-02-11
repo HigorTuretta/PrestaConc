@@ -2,22 +2,25 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
   background: ${({ theme }) => theme.COLORS.BLUE};
   background-position: center center;
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 100vh;
 `;
 
 export const Content = styled.section`
   width: 100%;
-  height: 100vh;
   max-width: 720px;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
 `;
 
 export const Logo = styled.div`
@@ -46,6 +49,7 @@ export const FormArea = styled.div`
     font-size: 16px;
     color: ${({ theme }) => theme.COLORS.WHITE};
     text-align: justify;
+    margin-bottom: 1rem;
   }
 `;
 

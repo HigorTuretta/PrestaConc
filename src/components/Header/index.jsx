@@ -25,10 +25,10 @@ export function Header() {
         <FaUser/>
         <span>Perfil</span>
       </Profile> */}
-      <Contact onClick={handleContact}>
+      {/* <Contact onClick={handleContact}>
         <FaBullhorn/>
         <span>Sugestões</span>
-      </Contact>
+      </Contact> */}
       <Logout onClick={handleSignOut}>
         <FaDoorOpen />
         <span>Sair</span>

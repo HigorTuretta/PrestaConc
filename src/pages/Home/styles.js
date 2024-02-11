@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Impede que a página inteira role */
+  overflow: hidden;
+  min-height: 100vh;
 `;
 
 export const Content = styled.section`
@@ -16,8 +16,7 @@ export const Content = styled.section`
   display: flex;
   flex-direction: column;
   padding: 1rem 1rem 3rem 1rem;
-  flex: 1; /* Faz com que o Content ocupe o espaço disponível verticalmente */
-  overflow: hidden; /* Impede que o Content role */
+  flex-grow: 1; /* Faz com que o Content ocupe o espaço disponível verticalmente */
 
   >:last-child{
     padding: 0;
