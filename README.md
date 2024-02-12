@@ -1,46 +1,54 @@
 
-# Calky - Travel Per Diem Calculator
+# Calky - Calculadora de Diárias para Viagens
 
-## Overview
+## Visão Geral
 
-Calky is an intuitive web application designed to simplify the management of travel expenses for work-related trips. It is an ideal tool for professionals who need to track their meal allowances and monitor their spending through the seamless logging of receipts. Developed with React and Node.js, Calky serves as a practical project in my journey as a student developer, aiming to build a robust portfolio.
+Calky é uma aplicação web intuitiva projetada para simplificar o gerenciamento de despesas de viagens a trabalho. É uma ferramenta ideal para profissionais que precisam acompanhar suas diárias de alimentação e monitorar seus gastos através do registro simplificado de recibos. Desenvolvido com React e Node.js, Calky serve como um projeto prático em minha jornada como desenvolvedor estudante, com o objetivo de construir um portfólio robusto.
 
-## Features
+## Recursos
 
-- **User Registration and Authentication**: Securely sign-up and log into the app.
-- **Travel Entry**: Input travel details, including state (UF) and city of destination.
-- **Expense Tracking**: A detailed view of the trip allows users to log the date, time, and financial information related to the journey.
-- **Balance Calculation**: Calky automatically calculates the total allowance for meals based on the trip information and updates the balance as expenses are logged.
-- **Receipt Management**: Enter and track meal receipts to monitor remaining balances.
+- **Registro e Autenticação de Usuário**: Cadastre-se e faça login de forma segura no aplicativo.
+- **Cadastro de Viagem**: Insira os detalhes da viagem, incluindo o estado (UF) e a cidade de destino.
+- **Acompanhamento de Despesas**: Uma visão detalhada da viagem permite aos usuários registrar a data, a hora e as informações financeiras relacionadas à jornada.
+- **Cálculo de Saldo**: Calky calcula automaticamente a diária total para refeições com base nas informações da viagem e atualiza o saldo conforme as despesas são registradas.
+- **Gerenciamento de Recibos**: Cadastre e acompanhe os recibos de refeição para monitorar os saldos restantes.
 
-## How to Use
+## Como Usar
 
-1. **Register/Login**: Begin by creating an account or logging in to access your dashboard.
-2. **Trip Registration**: Enter your travel details to start a new trip entry.
-3. **View Trip Details**: Access the trip details page to view your allocated meal allowance and log expenses.
-4. **Log Expenses**: Add receipts for each meal to deduct from your total balance.
-5. **Balance Monitoring**: Keep track of your remaining balance available for meals.
+1. **Registro/Login**: Comece criando uma conta ou fazendo login para acessar seu painel.
+2. **Registro de Viagem**: Entre com os detalhes de sua viagem para iniciar um novo registro.
+3. **Detalhes da Viagem**: Acesse a página de detalhes da viagem para ver sua diária de alimentação alocada e registrar despesas.
+4. **Registro de Despesas**: Adicione recibos para cada refeição para deduzir do seu saldo total.
+5. **Monitoramento de Saldo**: Mantenha controle do saldo restante disponível para alimentação.
 
-## Technologies
+## Tecnologias
 
 - **Frontend**: React.js
 - **Backend**: Node.js
-- **Database**: MySQL
+- **Banco de Dados**: [Especificar banco de dados se utilizado]
 
-## Acknowledgements
+## Configuração
 
-A special thanks to Josué Mon Serrat for his contribution to the design of Calky. [Connect with Josué](link-to-Josué's-profile).
+Instruções sobre como configurar o projeto localmente.
 
-## License
+## Contribuindo
 
-This project is licensed under the [MIT License](link-to-license).
+Sinta-se livre para fazer fork do projeto e enviar pull requests. Antes de contribuir, por favor leia as [diretrizes de contribuição](link-para-diretrizes-de-contribuição).
 
-## Screenshots
+## Agradecimentos
 
-![Calky Login Page](attachment:)
-*Login Page*
+Um agradecimento especial a Josué Mon Serrat por sua contribuição no design do Calky. [Conecte-se com Josué](link-para-perfil-de-Josué).
 
-![Calky Trip Details Page](attachment:image2.png)
-*Trip Details Page*
+## Licença
+
+Este projeto está licenciado sob a [Licença MIT](link-para-licença).
+
+## Capturas de Tela
+
+![Página de Login do Calky](.src/assets/Login.png)
+*Página de Login*
+
+![Página de Detalhes da Viagem do Calky](.src/assets/Details.png)
+*Página de Detalhes da Viagem*
 
 ---
