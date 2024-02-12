@@ -3,7 +3,7 @@
 
 ## Visão Geral
 
-(./src/assets/Arte01.png)
+![](./src/assets/Arte01.png)
 
 Calky é uma aplicação web intuitiva projetada para simplificar o gerenciamento de despesas de viagens a trabalho. É uma ferramenta ideal para profissionais que precisam acompanhar suas diárias de alimentação e monitorar seus gastos através do registro simplificado de recibos. Desenvolvido com React e Node.js, Calky serve como um projeto prático em minha jornada como desenvolvedor estudante, com o objetivo de construir um portfólio robusto.
 
