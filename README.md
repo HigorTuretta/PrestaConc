@@ -34,7 +34,7 @@ Calky é uma aplicação web intuitiva projetada para simplificar o gerenciament
 
 ## Contribuindo
 
-Sinta-se livre para fazer fork do projeto e enviar pull requests. Antes de contribuir, por favor leia as [diretrizes de contribuição](link-para-diretrizes-de-contribuição).
+Sinta-se livre para fazer fork do projeto e enviar pull requests.
 
 ## Agradecimentos
 
