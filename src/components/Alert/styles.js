@@ -40,7 +40,7 @@ export const Container = styled.div`
     align-items: center;
     background-color: darkgreen;
     width: 10%;
-    height: 50px;
+    height: 70px;
     border-radius: 5px;
     > svg {
       color: ${({ theme }) => theme.COLORS.WHITE};

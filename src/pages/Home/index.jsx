@@ -74,7 +74,7 @@ export function Home() {
             onClick={() => handleCreateTrip()}
           />
 
-          <Alert msg="O valor das diárias foi ajustado para R$100,00."/>
+          {/* <Alert msg="O valor das diárias foi ajustado para R$100,00."/> */}
 
           <Title title="Suas Viagens" />
 

@@ -36,6 +36,10 @@ export const Devarea = styled.div`
   > img {
     width: 150px;
   }
+
+  @media screen and (max-width: 550px) {
+    flex: 2;
+  }
 `;
 
 export const Infoarea = styled.div`
@@ -46,5 +50,8 @@ export const Infoarea = styled.div`
     > a {
       color: ${({ theme }) => theme.COLORS.BLACK};
     }
+  }
+  @media screen and (max-width: 550px) {
+    flex: 2;
   }
 `;
