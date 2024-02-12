@@ -1,5 +1,5 @@
 
-# Calky - Calculadora de Diárias para Viagens
+# Calky - Calculadora de Diárias para Viagens![](https://calky.app/)
 
 ## Visão Geral
 
