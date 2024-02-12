@@ -5,19 +5,21 @@ export const Container = styled.footer`
   width: 100vw;
   background-color: ${({ theme }) => theme.COLORS.BLUE};
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 5px 0px 0px 1px white;
+  padding: 0 3rem;
 
   @media screen and (max-width: 600px) {
     height: 70px;
+    padding: 0 1rem
   }
 `;
 
 export const Devarea = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   gap: 5px;
 
@@ -42,7 +44,7 @@ export const Devarea = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    flex: 2;
+    flex: 1;
     >img{
       width: 100px;
     }
@@ -51,6 +53,10 @@ export const Devarea = styled.div`
 
 export const Infoarea = styled.div`
   color: ${({ theme }) => theme.COLORS.WHITE};
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   > p {
     font-size: 0.8rem;
 
