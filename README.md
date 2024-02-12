@@ -23,15 +23,14 @@ Calky é uma aplicação web intuitiva projetada para simplificar o gerenciament
 4. **Registro de Despesas**: Adicione recibos para cada refeição para deduzir do seu saldo total.
 5. **Monitoramento de Saldo**: Mantenha controle do saldo restante disponível para alimentação.
 
+
+![](./src/assets/Arte02.png)
+
 ## Tecnologias
 
 - **Frontend**: React.js
 - **Backend**: Node.js
 - **Banco de Dados**: [Especificar banco de dados se utilizado]
-
-## Configuração
-
-Instruções sobre como configurar o projeto localmente.
 
 ## Contribuindo
 
@@ -39,18 +38,9 @@ Sinta-se livre para fazer fork do projeto e enviar pull requests. Antes de contr
 
 ## Agradecimentos
 
-Um agradecimento especial a Josué Mon Serrat por sua contribuição no design do Calky. [Conecte-se com Josué](link-para-perfil-de-Josué).
+Um agradecimento especial a Josué Mon Serrat por sua contribuição no design do Calky. [Conecte-se com Josué](https://www.behance.net/jhosuemonsfc78).
 
 ## Licença
 
 Este projeto está licenciado sob a [Licença MIT](link-para-licença).
 
-## Capturas de Tela
-
-![Página de Login do Calky](./src/assets/Login.png)
-*Página de Login*
-
-![Página de Detalhes da Viagem do Calky](./src/assets/Details.png)
-*Página de Detalhes da Viagem*
-
----
